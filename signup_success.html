@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>報名成功 - 課程報名系統</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .success-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .success-header {
+            text-align: center;
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            padding: 40px 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+        
+        .success-icon {
+            font-size: 64px;
+            margin-bottom: 16px;
+        }
+        
+        .success-title {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+        
+        .success-subtitle {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        
+        .info-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: var(--box-shadow);
+            padding: 24px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--primary-blue);
+        }
+        
+        .info-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .payment-info {
+            background: #fef3c7;
+            border: 1px solid #fbbf24;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 16px 0;
+        }
+        
+        .payment-details {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 12px 20px;
+            margin: 16px 0;
+        }
+        
+        .payment-label {
+            font-weight: 600;
+            color: #374151;
+        }
+        
+        .payment-value {
+            color: #111827;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .line-info {
+            background: #dcfce7;
+            border: 1px solid #22c55e;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 16px 0;
+        }
+        
+        .line-qr {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .qr-placeholder {
+            width: 150px;
+            height: 150px;
+            background: #f3f4f6;
+            border: 2px dashed #9ca3af;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            color: #6b7280;
+            font-size: 14px;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        
+        .reference-number {
+            background: #eff6ff;
+            border: 1px solid #3b82f6;
+            border-radius: 8px;
+            padding: 16px;
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .ref-label {
+            font-size: 14px;
+            color: #6b7280;
+            margin-bottom: 8px;
+        }
+        
+        .ref-number {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-blue);
+            font-family: 'Courier New', monospace;
+        }
+        
+        .warning-text {
+            color: #dc2626;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        @media (max-width: 768px) {
+            .success-container {
+                padding: 10px;
+            }
+            
+            .success-header {
+                padding: 30px 15px;
+            }
+            
+            .success-title {
+                font-size: 24px;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+            
+            .payment-details {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="success-container">
+        <!-- 成功標題 -->
+        <div class="success-header">
+            <div class="success-icon">✅</div>
+            <h1 class="success-title">報名成功！</h1>
+            <p class="success-subtitle">您的課程報名申請已成功提交</p>
+        </div>
+        
+        <!-- 報名資訊確認 -->
+        <div class="info-card">
+            <h2 class="info-title">
+                📋 報名資訊確認
+            </h2>
+            <div class="reference-number">
+                <div class="ref-label">報名編號</div>
+                <div class="ref-number">SPO-2025-001234</div>
+            </div>
+            <div style="display: grid; grid-template-columns: auto 1fr; gap: 12px 20px;">
+                <span><strong>課程名稱：</strong></span>
+                <span>游泳特訓班 - 基礎組 (2025/11)</span>
+                <span><strong>學員姓名：</strong></span>
+                <span>王小明</span>
+                <span><strong>報名日期：</strong></span>
+                <span>2025年10月22日</span>
+                <span><strong>課程費用：</strong></span>
+                <span style="color: #dc2626; font-weight: bold;">NT$ 3,600</span>
+            </div>
+        </div>
+        
+        <!-- 繳費資訊 -->
+        <div class="info-card">
+            <h2 class="info-title">
+                💳 繳費資訊
+            </h2>
+            <div class="payment-info">
+                <h3 style="color: #92400e; font-weight: bold; margin-bottom: 12px;">⚠️ 請於 3 個工作天內完成繳費</h3>
+                <div class="payment-details">
+                    <span class="payment-label">銀行名稱：</span>
+                    <span class="payment-value">台灣銀行 (004)</span>
+                    <span class="payment-label">戶名：</span>
+                    <span class="payment-value">運動行政系統有限公司</span>
+                    <span class="payment-label">帳號：</span>
+                    <span class="payment-value">012-345-678901</span>
+                    <span class="payment-label">匯款金額：</span>
+                    <span class="payment-value" style="color: #dc2626; font-weight: bold;">NT$ 3,600</span>
+                </div>
+                <p class="warning-text">※ 請務必在匯款後保留轉帳憑證，並依照下方指示傳送證明</p>
+            </div>
+        </div>
+        
+        <!-- LINE 官方帳號資訊 -->
+        <div class="info-card">
+            <h2 class="info-title">
+                💬 繳費憑證傳送
+            </h2>
+            <div class="line-info">
+                <h3 style="color: #166534; font-weight: bold; margin-bottom: 12px;">📱 請加入官方 LINE 並傳送繳費憑證</h3>
+                <div class="line-qr">
+                    <div class="qr-placeholder">
+                        LINE QR Code<br>
+                        (實際部署時放置)
+                    </div>
+                    <p style="margin-top: 12px; font-weight: 600;">LINE ID: @spo_admin</p>
+                </div>
+                <div style="background: white; padding: 16px; border-radius: 6px; margin-top: 16px;">
+                    <h4 style="color: #374151; font-weight: bold; margin-bottom: 8px;">傳送訊息範例：</h4>
+                    <div style="background: #f9fafb; padding: 12px; border-radius: 4px; font-family: 'Courier New', monospace; font-size: 14px;">
+                        報名編號：SPO-2025-001234<br>
+                        學員姓名：王小明<br>
+                        課程：游泳特訓班<br>
+                        [附上轉帳憑證照片]
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 重要提醒 -->
+        <div class="info-card" style="border-left-color: #f59e0b;">
+            <h2 class="info-title" style="color: #f59e0b;">
+                ⚠️ 重要提醒
+            </h2>
+            <ul style="color: #374151; line-height: 1.6; margin-left: 20px;">
+                <li>請在 <strong>3 個工作天內</strong> 完成繳費，逾期將自動取消報名</li>
+                <li>繳費後請務必將轉帳憑證傳送至官方 LINE 帳號</li>
+                <li>收到憑證後，我們將在 1-2 個工作天內確認並通知您</li>
+                <li>課程相關資訊將在繳費確認後以 LINE 或 Email 通知</li>
+                <li>如有任何問題，請洽詢官方 LINE 客服</li>
+            </ul>
+        </div>
+        
+        <!-- 操作按鈕 -->
+        <div class="action-buttons">
+            <button onclick="window.print()" class="btn-secondary" style="padding: 12px 24px;">
+                🖨️ 列印此頁
+            </button>
+            <button onclick="window.location.href='index.html'" class="btn-primary" style="padding: 12px 24px;">
+                🏠 返回首頁
+            </button>
+            <button onclick="window.location.href='member_dashboard.html'" class="btn-primary" style="padding: 12px 24px;">
+                👤 會員專區
+            </button>
+        </div>
+        
+        <!-- 頁尾資訊 -->
+        <div style="text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid #e5e7eb; color: #6b7280; font-size: 14px;">
+            <p>© 2025 運動行政系統 | 如有疑問請聯繫客服</p>
+            <p>客服 LINE: @spo_admin | 客服電話: (02) 1234-5678</p>
+        </div>
+    </div>
+</body>
+</html>
