@@ -157,15 +157,16 @@ SPO_wireframe/
 ## 🚀 快速開始
 
 ### 線上預覽
-- **GitHub Pages**: [https://your-username.github.io/SPO_wireframe](https://your-username.github.io/SPO_wireframe)
+- **GitHub Repository**: [https://github.com/juliechen1491/spo_wireframe](https://github.com/juliechen1491/spo_wireframe)
+- **GitHub Pages**: [https://juliechen1491.github.io/spo_wireframe](https://juliechen1491.github.io/spo_wireframe) *(需設定後啟用)*
 - **前台首頁**: 直接開啟 `index.html`
 - **後台管理**: 開啟 `backend/admin_dashboard.html`
 
 ### 本地開發
 1. **克隆項目**
    ```bash
-   git clone https://github.com/your-username/SPO_wireframe.git
-   cd SPO_wireframe
+   git clone https://github.com/juliechen1491/spo_wireframe.git
+   cd spo_wireframe
    ```
 
 2. **開啟頁面**
