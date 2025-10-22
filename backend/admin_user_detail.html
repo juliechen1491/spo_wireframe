@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>後台 - 會員詳情/編輯</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="logo">行政管理系統</div>
+        <nav>
+            <ul>
+                <li><a href="admin_dashboard.html">儀表板</a></li>
+                <li><a href="admin_schools.html">學校管理</a></li>
+                <li><a href="admin_courses.html">課程管理</a></li>
+                <li><a href="admin_registrations.html">報名管理</a></li>
+                <li><a href="admin_users.html" class="active">會員管理</a></li>
+                <li><a href="admin_coaches.html">教練管理</a></li>
+                <li><a href="admin_permissions.html">權限管理</a></li>
+            </ul>
+        </nav>
+        <div class="logout">
+             <a href="#">登出</a>
+        </div>
+    </aside>
+
+    <div class="main-content">
+
+        <div class="header-bar">
+            <h1>編輯會員：王小明 (M1001)</h1>
+            <a href="admin_users.html" style="font-size: 14px;">< 返回會員列表</a>
+        </div>
+        
+        <form action="#" method="POST">
+            
+            <div class="card-section">
+                <h2>基本聯絡資訊</h2>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                    <div class="form-group">
+                        <label for="full-name">會員姓名 <span style="color: var(--danger-color);">*</span></label>
+                        <input type="text" id="full-name" name="full_name" value="王小明" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="status">會員狀態</label>
+                        <select id="status" name="status">
+                            <option value="active" selected>啟用 (可登入/報名)</option>
+                            <option value="suspended">停用 (禁止登入)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email <span style="color: var(--danger-color);">*</span></label>
+                        <input type="email" id="email" name="email" value="wang.xm@email.com" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">手機號碼</label>
+                        <input type="tel" id="phone" name="phone" value="0910123456">
+                    </div>
+                    
+                    <div class="form-group" style="grid-column: span 2;">
+                        <label for="password-reset">密碼重設</label>
+                        <div style="display: flex; gap: 10px;">
+                            <input type="password" id="password-reset" name="password_reset" placeholder="輸入新密碼 (留空則不修改)">
+                            <button type="button" class="btn btn-danger" style="width: 150px; flex-shrink: 0;">發送重設信</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="action-buttons" style="margin-top: 20px;">
+                    <button type="submit" class="btn btn-primary">儲存會員資料</button>
+                </div>
+            </div>
+            
+        </form>
+
+        <div class="card-section">
+            <h2 style="display: flex; justify-content: space-between; align-items: center;">
+                關聯學員 (由該監護人報名的兒童)
+                <a href="#" style="font-size: 14px;">+ 新增學員</a>
+            </h2>
+            <div class="table-responsive">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>學員姓名</th>
+                            <th>與監護人關係</th>
+                            <th>生日</th>
+                            <th>報名中課程數</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>王小虎</td>
+                            <td>兒子</td>
+                            <td>2018/05/20</td>
+                            <td>2</td>
+                            <td><a href="#">編輯學員</a></td>
+                        </tr>
+                        <tr>
+                            <td>王小美</td>
+                            <td>女兒</td>
+                            <td>2020/11/01</td>
+                            <td>0</td>
+                            <td><a href="#">編輯學員</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="card-section">
+            <h2>報名歷史紀錄</h2>
+            <div class="table-responsive">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>報名 ID</th>
+                            <th>課程名稱</th>
+                            <th>學員</th>
+                            <th>報名日期</th>
+                            <th>狀態</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>R2001</td>
+                            <td>夏季基礎籃球班 (C001)</td>
+                            <td>王小虎</td>
+                            <td>2025/10/15</td>
+                            <td><span class="status-badge status-paid">已報名</span></td>
+                            <td><a href="admin_registration_detail.html?id=R2001">檢視</a></td>
+                        </tr>
+                        <tr>
+                            <td>R1998</td>
+                            <td>初階游泳基礎訓練 (C003)</td>
+                            <td>王小虎</td>
+                            <td>2024/11/01</td>
+                            <td><span class="status-badge status-paid">已報名</span></td>
+                            <td><a href="admin_registration_detail.html?id=R1998">檢視</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+    </div>
+
+</body>
+</html>

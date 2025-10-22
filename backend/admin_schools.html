@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>後台 - 學校管理</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="logo">行政管理系統</div>
+        <nav>
+            <ul>
+                <li><a href="admin_dashboard.html">儀表板</a></li>
+                <li><a href="admin_schools.html" class="active">學校管理</a></li>
+                <li><a href="admin_courses.html">課程管理</a></li>
+                <li><a href="admin_registrations.html">報名管理</a></li>
+                <li><a href="admin_users.html">會員管理</a></li>
+                <li><a href="admin_coaches.html">教練管理</a></li>
+                <li><a href="admin_permissions.html">權限管理</a></li>
+            </ul>
+        </nav>
+        <div class="logout">
+             <a href="#">登出</a>
+        </div>
+    </aside>
+
+    <div class="main-content">
+
+        <div class="header-bar">
+            <h1>學校列表</h1>
+            <a href="school_add.html" class="btn cta-button">新增學校</a>
+        </div>
+
+        <div class="control-bar">
+            <input type="text" placeholder="輸入學校名稱或地點搜尋...">
+            <select>
+                <option value="all">所有狀態</option>
+                <option value="active">啟用中</option>
+                <option value="inactive">已停用</option>
+            </select>
+        </div>
+
+        <div class="table-responsive">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>學校名稱</th>
+                        <th>聯絡人</th>
+                        <th>聯絡電話</th>
+                        <th>課程數量</th>
+                        <th>狀態</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>S001</td>
+                        <td>A 運動大學附屬學院</td>
+                        <td>陳經理</td>
+                        <td>02-12345678</td>
+                        <td>12</td>
+                        <td><span class="status-badge status-active">啟用中</span></td>
+                        <td class="action-links">
+                            <a href="school_edit.html?id=S001">編輯</a>
+                            <a href="#" style="color: var(--danger-color);">停用</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>S002</td>
+                        <td>B 青少年體育中心</td>
+                        <td>林小姐</td>
+                        <td>0987654321</td>
+                        <td>8</td>
+                        <td><span class="status-badge status-active">啟用中</span></td>
+                        <td class="action-links">
+                            <a href="school_edit.html?id=S002">編輯</a>
+                            <a href="#" style="color: var(--danger-color);">停用</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>S003</td>
+                        <td>C 地方社區活動中心</td>
+                        <td>王先生</td>
+                        <td>04-98765432</td>
+                        <td>0</td>
+                        <td><span class="status-badge status-inactive">已停用</span></td>
+                        <td class="action-links">
+                            <a href="school_edit.html?id=S003">編輯</a>
+                            <a href="#" style="color: var(--success-color);">啟用</a>
+                        </td>
+                    </tr>
+                    </tbody>
+            </table>
+        </div>
+        
+    </div>
+
+</body>
+</html>

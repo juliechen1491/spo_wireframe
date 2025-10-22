@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>後台 - 新增/編輯權限組別</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- A. 左側側邊欄導航 (Sidebar) -->
+    <aside class="sidebar">
+        <div class="logo">行政管理系統</div>
+        <nav>
+            <ul>
+                <li><a href="admin_dashboard.html">儀表板</a></li>
+                <li><a href="admin_schools.html">學校管理</a></li>
+                <li><a href="admin_courses.html">課程管理</a></li>
+                <li><a href="admin_registrations.html">報名管理</a></li>
+                <li><a href="admin_users.html">會員管理</a></li>
+                <li><a href="admin_coaches.html">教練管理</a></li>
+                <li><a href="admin_permissions.html" class="active">權限管理</a></li>
+            </ul>
+        </nav>
+        <div class="logout">
+             <a href="#">登出</a>
+        </div>
+    </aside>
+
+    <!-- 右側主內容區 -->
+    <div class="main-content">
+
+        <!-- B. 主要標題/操作區 - 編輯範例：編輯行政人員權限 -->
+        <div class="header-bar">
+            <h1>編輯權限組別：行政人員 (Staff)</h1>
+        </div>
+        
+        <div class="form-container">
+            <form action="#" method="POST">
+                
+                <!-- 1. 基本設定 -->
+                <div class="form-card">
+                    <h2>權限組別基本資料</h2>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="role-name">組別名稱 <span style="color: var(--danger-color);">*</span></label>
+                            <input type="text" id="role-name" name="role_name" value="學校行政人員" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="role-code">系統代碼 (Code)</label>
+                            <input type="text" id="role-code" name="role_code" value="SCHOOL_STAFF" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">組別描述</label>
+                        <textarea id="description" name="description" rows="2">管理所屬學校的課程、報名、會員及教練資料。</textarea>
+                    </div>
+                </div>
+
+                <!-- 2. 權限清單 (核心功能) -->
+                <div class="form-card">
+                    <h2>系統操作權限清單</h2>
+
+                    <table class="permission-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 25%;">模組/頁面</th>
+                                <th style="width: 75%;">操作權限與範圍 (Scope & Actions)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- B2 學校管理 (Super Admin Only) -->
+                            <tr>
+                                <th>學校管理 (B2)</th>
+                                <td>
+                                    <div class="permission-scope">
+                                        <strong>全域操作 (Super Admin Only)</strong>
+                                        <div class="permission-option"><input type="checkbox"> 檢視學校列表 (所有)</div>
+                                        <div class="permission-option"><input type="checkbox"> 新增/編輯學校</div>
+                                        <div class="permission-option"><input type="checkbox"> 刪除學校</div>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- B7 權限管理 (Super Admin Only) -->
+                            <tr>
+                                <th>權限管理 (B7)</th>
+                                <td>
+                                    <div class="permission-scope">
+                                        <strong>全域操作 (Super Admin Only)</strong>
+                                        <div class="permission-option"><input type="checkbox"> 檢視權限組別</div>
+                                        <div class="permission-option"><input type="checkbox"> 編輯/新增權限組別</div>
+                                    </div>
+                                </td>
+                            </tr>
+                            
+                            <!-- B3 課程管理 (Global vs. Local) -->
+                            <tr>
+                                <th>課程管理 (B3)</th>
+                                <td>
+                                    <div class="permission-scope">
+                                        <strong>全域範圍 (所有學校)</strong>
+                                        <div class="permission-option"><input type="checkbox"> 檢視所有課程列表</div>
+                                        <div class="permission-option"><input type="checkbox"> 編輯/新增所有課程</div>
+                                    </div>
+                                    <div class="permission-scope">
+                                        <strong>所屬學校範圍 (Local)</strong>
+                                        <div class="permission-option"><input type="checkbox" checked> 檢視所屬學校課程</div>
+                                        <div class="permission-option"><input type="checkbox" checked> 編輯/新增所屬學校課程</div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- B4 報名管理 (Global vs. Local) -->
+                            <tr>
+                                <th>報名管理 (B4)</th>
+                                <td>
+                                    <div class="permission-scope">
+                                        <strong>全域範圍 (所有學校)</strong>
+                                        <div class="permission-option"><input type="checkbox"> 檢視所有報名記錄</div>
+                                        <div class="permission-option"><input type="checkbox"> 執行跨校退款操作</div>
+                                    </div>
+                                    <div class="permission-scope">
+                                        <strong>所屬學校範圍 (Local)</strong>
+                                        <div class="permission-option"><input type="checkbox" checked> 檢視所屬學校報名記錄</div>
+                                        <div class="permission-option"><input type="checkbox" checked> 更改付款狀態/本校退費</div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- B5 會員/B6 教練管理 (Global vs. Local) -->
+                            <tr>
+                                <th>會員/教練管理 (B5/B6)</th>
+                                <td>
+                                    <div class="permission-scope">
+                                        <strong>全域範圍 (所有會員/教練)</strong>
+                                        <div class="permission-option"><input type="checkbox"> 檢視所有會員列表</div>
+                                        <div class="permission-option"><input type="checkbox"> 檢視所有教練列表</div>
+                                    </div>
+                                    <div class="permission-scope">
+                                        <strong>所屬學校範圍 (Local)</strong>
+                                        <div class="permission-option"><input type="checkbox" checked> 檢視所屬學校會員</div>
+                                        <div class="permission-option"><input type="checkbox" checked> 編輯所屬學校會員資料</div>
+                                        <div class="permission-option"><input type="checkbox" checked> 檢視/編輯所屬學校教練資料</div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <div class="permission-group-title">前台操作權限 (Client Side)</div>
+
+                    <table class="permission-table">
+                        <tbody>
+                            <!-- 前台報名/支付權限 -->
+                            <tr>
+                                <th>會員交易與功能</th>
+                                <td>
+                                    <div class="permission-scope">
+                                        <strong>前台權限</strong>
+                                        <div class="permission-option"><input type="checkbox"> 允許報名課程 (家長專有)</div>
+                                        <div class="permission-option"><input type="checkbox"> 允許付款 (家長專有)</div>
+                                        <div class="permission-option"><input type="checkbox" checked> 允許瀏覽課程列表</div>
+                                        <div class="permission-option"><input type="checkbox" checked> 允許檢視個人課表 (兒童會員專有)</div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+
+                <!-- 操作按鈕 -->
+                <div class="action-buttons">
+                    <button type="submit" class="btn btn-primary">儲存權限組別</button>
+                    <a href="admin_permissions.html" class="btn btn-secondary">取消並返回</a>
+                </div>
+
+            </form>
+        </div>
+        
+    </div>
+
+</body>
+</html>

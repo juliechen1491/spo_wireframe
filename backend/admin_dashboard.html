@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>後台 - 儀表板</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="logo">行政管理系統</div>
+        <nav>
+            <ul>
+                <li><a href="admin_dashboard.html" class="active">儀表板</a></li>
+                <li><a href="admin_schools.html">學校管理</a></li>
+                <li><a href="admin_courses.html">課程管理</a></li>
+                <li><a href="admin_registrations.html">報名管理</a></li>
+                <li><a href="admin_users.html">會員管理</a></li>
+                <li><a href="admin_coaches.html">教練管理</a></li>
+                <li><a href="admin_permissions.html">權限管理</a></li>
+            </ul>
+        </nav>
+        <div class="logout">
+             <a href="#">登出</a>
+        </div>
+    </aside>
+
+    <div class="main-content">
+        <h1>儀表板概覽</h1>
+
+        <div class="kpi-cards">
+            
+            <div class="kpi-card card-1">
+                <h3>今日新報名人數</h3>
+                <div class="value">18</div>
+                <div class="trend">+5 筆 (較昨日)</div>
+            </div>
+
+            <div class="kpi-card card-2">
+                <h3>活躍課程總數</h3>
+                <div class="value">45</div>
+                <div class="trend">無變動</div>
+            </div>
+
+            <div class="kpi-card card-3">
+                <h3>本月新註冊會員</h3>
+                <div class="value">123</div>
+                <div class="trend">+12% (較上月)</div>
+            </div>
+            
+            <div class="kpi-card card-4">
+                <h3>待收總額 (NTD)</h3>
+                <div class="value">$ 25,000</div>
+                <div class="trend negative">待處理 3 筆報名</div>
+            </div>
+            
+        </div>
+
+        <div class="dashboard-widgets">
+            
+            <div class="widget">
+                <h2>近 30 天報名趨勢</h2>
+                <div class="chart-placeholder">
+                    [折線圖佔位符：顯示報名人數曲線]
+                </div>
+            </div>
+            
+            <div class="widget">
+                <h2>待處理事項</h2>
+                <ul class="task-list">
+                    <li>
+                        <span>課程 ID C011 報名</span>
+                        <span class="status">待付款</span>
+                        <a href="#" class="action-link">處理 &gt;</a>
+                    </li>
+                    <li>
+                        <span>課程 ID C045 報名</span>
+                        <span class="status">待付款</span>
+                        <a href="#" class="action-link">處理 &gt;</a>
+                    </li>
+                    <li>
+                        <span>[S003] 學校啟用請求</span>
+                        <span style="color: var(--info-color); font-weight: bold;">待審核</span>
+                        <a href="#" class="action-link">審核 &gt;</a>
+                    </li>
+                    <li>
+                        <span>課程 ID C022 已滿額</span>
+                        <span style="color: var(--success-color); font-weight: bold;">已完成</span>
+                        <a href="#" class="action-link">檢視 &gt;</a>
+                    </li>
+                </ul>
+            </div>
+            
+        </div>
+        
+    </div>
+
+</body>
+</html>

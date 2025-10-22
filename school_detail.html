@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>學校名稱 - 課程列表</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* 自定義樣式補充 */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px var(--spacing);
+            border-bottom: 1px solid var(--border-color);
+            background: white;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav ul li {
+            margin-left: var(--spacing);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin: 40px 0 30px;
+            font-size: 28px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        /* 響應式設計 */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 24px;
+            }
+
+            .nav ul {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .nav ul li {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="logo">
+            <a href="#">運動系統</a>
+        </div>
+        <nav class="nav">
+            <ul>
+                <li><a href="#">首頁</a></li>
+                <li><a href="#">關於我們</a></li>
+                <li><a href="#">聯絡我們</a></li>
+            </ul>
+        </nav>
+        <div class="user-actions">
+            <a href="#" class="btn btn-primary">會員登入 / 註冊</a>
+        </div>
+    </header>
+
+    <main class="container">
+        
+        <div class="school-info-header">
+            <h1>A 運動大學附屬學院</h1>
+            <p><strong>地點：</strong>台北市大安區 | <strong>聯繫：</strong>(02) 1234-5678</p>
+            <p>本學院致力於提供高品質的運動教育和訓練，適合各年齡層參與。</p>
+        </div>
+
+        <h2>所有課程</h2>
+        <div class="filter-bar">
+            <select>
+                <option value="all">所有類別</option>
+                <option value="basketball">籃球</option>
+                <option value="swim">游泳</option>
+                <option value="tennis">網球</option>
+            </select>
+            <select>
+                <option value="all">所有年齡</option>
+                <option value="child">兒童 (6-12歲)</option>
+                <option value="teen">青少年 (13-17歲)</option>
+                <option value="adult">成人 (18歲以上)</option>
+            </select>
+        </div>
+
+        <div class="school-grid">
+            <div class="card">
+                <h3>游泳特訓班 - 基礎組</h3>
+                <p><strong>時間：</strong>週一、三、五 18:00-19:00</p>
+                <p><strong>對象：</strong>成人初學者</p>
+                <p><strong>費用：</strong>$3,600/月</p>
+                <a href="course_detail.html" class="btn-primary">查看詳情</a>
+            </div>
+
+            <div class="card">
+                <h3>兒童籃球班</h3>
+                <p><strong>時間：</strong>週二、四 16:00-17:30</p>
+                <p><strong>對象：</strong>6-12歲兒童</p>
+                <p><strong>費用：</strong>$2,800/月</p>
+                <a href="course_detail.html" class="btn-primary">查看詳情</a>
+            </div>
+
+            <div class="card">
+                <h3>網球進階班</h3>
+                <p><strong>時間：</strong>週六、日 09:00-11:00</p>
+                <p><strong>對象：</strong>有基礎經驗者</p>
+                <p><strong>費用：</strong>$4,200/月</p>
+                <a href="course_detail.html" class="btn-primary">查看詳情</a>
+            </div>
+
+            <div class="card">
+                <h3>青少年足球隊</h3>
+                <p><strong>時間：</strong>週三、五 17:00-19:00</p>
+                <p><strong>對象：</strong>13-17歲青少年</p>
+                <p><strong>費用：</strong>$3,200/月</p>
+                <a href="course_detail.html" class="btn-primary">查看詳情</a>
+            </div>
+        </div>
+    </main>
+
+    <footer style="background-color: #f8f9fa; text-align: center; padding: 20px; margin-top: 40px; color: #666;">
+        © 2025 運動行政系統. All rights reserved. | [隱私權政策] | [使用條款]
+    </footer>
+
+</body>
+</html>

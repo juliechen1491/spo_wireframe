@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>運動行政系統 - 合作學校</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* 自定義樣式補充 */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px var(--spacing);
+            border-bottom: 1px solid var(--border-color);
+            background: white;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav ul li {
+            margin-left: var(--spacing);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin: 40px 0 30px;
+            font-size: 28px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .school-card:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 提升質感 */
+        }
+
+        .school-image-placeholder {
+            width: 100%;
+            height: 180px;
+            background-color: var(--secondary-color);
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #999;
+            font-style: italic;
+        }
+
+        .school-name {
+            font-size: 20px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        /* 5. 底部 (Footer) */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            border-top: 1px solid var(--border-color);
+            background-color: var(--secondary-color);
+            font-size: 14px;
+            color: #666;
+        }
+
+        /* 6. 行動裝置優化 (Mobile Optimization) */
+        @media (max-width: 600px) {
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .nav ul {
+                padding: 10px 0;
+            }
+            .nav ul li {
+                margin-left: 0;
+                margin-right: 15px;
+            }
+            .school-grid {
+                grid-template-columns: 1fr; /* 手機上單欄顯示 */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="logo">
+            <a href="#">運動系統</a>
+        </div>
+        <nav class="nav">
+            <ul>
+                <li><a href="#">首頁</a></li>
+                <li><a href="#">關於我們</a></li>
+                <li><a href="#">聯絡我們</a></li>
+            </ul>
+        </nav>
+        <div class="user-actions">
+            <a href="#" class="btn btn-primary">會員登入 / 註冊</a>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1 class="section-title">合作夥伴學校一覽</h1>
+        
+        <div class="grid grid-3">
+            
+            <div class="card">
+                <div class="school-image-placeholder">學校圖片預留區</div>
+                <h3>A 運動大學附屬學院</h3>
+                <p>地點：台北市 | 類型：綜合運動</p>
+                <a href="school_detail.html" class="btn-primary">查看課程</a>
+            </div>
+
+            <div class="card">
+                <div class="school-image-placeholder">學校圖片預留區</div>
+                <h3>B 青少年體育中心</h3>
+                <p>地點：新北市 | 類型：兒童專項</p>
+                <a href="school_detail.html" class="btn-primary">查看課程</a>
+            </div>
+
+            <div class="card">
+                <div class="school-image-placeholder">學校圖片預留區</div>
+                <h3>C 地方社區活動中心</h3>
+                <p>地點：台中市 | 類型：成人健身</p>
+                <a href="school_detail.html" class="btn-primary">查看課程</a>
+            </div>
+
+            <div class="card">
+                <div class="school-image-placeholder">學校圖片預留區</div>
+                <h3>D 專業籃球訓練營</h3>
+                <p>地點：高雄市 | 類型：單一專項</p>
+                <a href="school_detail.html" class="btn-primary">查看課程</a>
+            </div>
+
+            </div>
+    </main>
+
+    <footer style="background-color: #f8f9fa; text-align: center; padding: 20px; margin-top: 40px; color: #666;">
+        © 2025 運動行政系統. All rights reserved. | [隱私權政策] | [使用條款]
+    </footer>
+
+</body>
+</html>

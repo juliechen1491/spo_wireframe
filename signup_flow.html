@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>課程報名表單</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .required::after {
+            content: '*';
+            color: #ef4444;
+            margin-left: 4px;
+        }
+        .shadow-primary {
+            box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.3), 0 4px 6px -2px rgba(59, 130, 246, 0.05);
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-blue': '#3b82f6',
+                        'secondary-gray': '#6b7280',
+                    }
+                }
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // 模擬：判斷是否為兒童課程，並自動帶出監護人資訊
+            const isChildCourse = true; // 假設這門課是給兒童上的
+            const loggedInAsAdult = true; // 假設王大人已登入
+            
+            const guardianSection = document.getElementById('guardian-info-section');
+            const studentSectionTitle = document.getElementById('student-section-title');
+            
+            if (isChildCourse && loggedInAsAdult) {
+                // 如果是兒童課程且是成人報名，顯示監護人區塊
+                guardianSection.style.display = 'block';
+                // 模擬系統帶入王大人的資料
+                document.getElementById('guardian-name').value = '王大人 (系統帶入)';
+                document.getElementById('guardian-phone').value = '0912-345678 (系統帶入)';
+                document.getElementById('guardian-email').value = 'wang.daren@example.com (系統帶入)';
+                document.getElementById('guardian-address').value = '台北市某路某號 (系統帶入)';
+                
+                studentSectionTitle.textContent = '學員資料 (王小明)';
+            } else {
+                // 否則隱藏監護人區塊 (例如成人為自己報名)
+                guardianSection.style.display = 'none';
+                studentSectionTitle.textContent = '學員資料';
+            }
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <header class="header-title">
+            <h1>課程報名表單</h1>
+            <p>課程名稱：游泳特訓班 - 基礎組 (2025/11)</p>
+        </header>
+
+        <form id="registration-form">
+
+            <!-- 區塊 A: 報名對象 (學員) 必填資訊 -->
+            <div class="form-card">
+                <h2 class="form-title">學員資料</h2>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="student-name" class="form-label required">學員姓名</label>
+                        <input type="text" id="student-name" name="student_name" placeholder="請填寫學員姓名" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="student-id" class="form-label required">學員身分證字號/護照號碼</label>
+                        <input type="text" id="student-id" name="student_id" placeholder="用於保險與身份核對" class="form-control">
+                    </div>
+                </div>
+                <div class="grid md:grid-cols-3 gap-x-6">
+                    <div class="field-group">
+                        <label for="student-dob" class="label required">學員生日</label>
+                        <input type="date" id="student-dob" name="student_dob">
+                    </div>
+                    <div class="field-group">
+                        <label for="student-phone" class="label required">學員手機</label>
+                        <input type="tel" id="student-phone" name="student_phone" placeholder="若無，可填監護人電話">
+                    </div>
+                    <div class="field-group">
+                        <label for="student-height" class="label required">學員身高 (cm)</label>
+                        <input type="text" id="student-height" name="student_height" placeholder="例如：125">
+                    </div>
+                </div>
+                <div class="field-group">
+                    <label for="student-address" class="label required">聯絡地址</label>
+                    <input type="text" id="student-address" name="student_address" placeholder="請填寫完整的聯絡地址">
+                </div>
+            </div>
+            
+            <!-- 區塊 B: 監護人資訊 (成人為兒童報名時顯示) -->
+            <div id="guardian-info-section" class="form-card" style="display: none;">
+                <h2 class="text-xl font-semibold text-primary-blue form-title">監護人資料 (系統自動帶入)</h2>
+                <div class="bg-blue-50 p-3 rounded-lg border border-blue-200 mb-4">
+                    <p class="text-sm text-blue-700 font-medium">系統已根據您的登入帳號自動帶入，若需修改請至會員專區。</p>
+                </div>
+                <div class="grid md:grid-cols-2 gap-x-6">
+                    <div class="field-group">
+                        <label for="guardian-name" class="label">監護人姓名</label>
+                        <input type="text" id="guardian-name" name="guardian_name" disabled class="bg-gray-100 cursor-not-allowed">
+                    </div>
+                    <div class="field-group">
+                        <label for="guardian-email" class="label">監護人 Email</label>
+                        <input type="email" id="guardian-email" name="guardian_email" disabled class="bg-gray-100 cursor-not-allowed">
+                    </div>
+                </div>
+                <div class="grid md:grid-cols-2 gap-x-6">
+                    <div class="field-group">
+                        <label for="guardian-phone" class="label">監護人手機</label>
+                        <input type="tel" id="guardian-phone" name="guardian_phone" disabled class="bg-gray-100 cursor-not-allowed">
+                    </div>
+                    <div class="field-group">
+                        <label for="guardian-address" class="label">監護人地址</label>
+                        <input type="text" id="guardian-address" name="guardian_address" disabled class="bg-gray-100 cursor-not-allowed">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 區塊 C: 交易與緊急聯絡人 (必填) -->
+            <div class="form-card">
+                <h2 class="text-xl font-semibold text-primary-blue form-title">交易與緊急聯絡人資訊</h2>
+                <div class="grid md:grid-cols-2 gap-x-6">
+                    <div class="field-group">
+                        <label for="emergency-contact" class="label required">緊急聯絡人姓名</label>
+                        <input type="text" id="emergency-contact" name="emergency_contact" placeholder="姓名">
+                    </div>
+                    <div class="field-group">
+                        <label for="emergency-phone" class="label required">緊急聯絡人電話</label>
+                        <input type="tel" id="emergency-phone" name="emergency_phone" placeholder="手機或市話">
+                    </div>
+                </div>
+                <div class="grid md:grid-cols-2 gap-x-6">
+                    <div class="field-group">
+                        <label for="invoice-option" class="label required">發票選項</label>
+                        <select id="invoice-option" name="invoice_option" required>
+                            <option value="">請選擇</option>
+                            <option value="paper">紙本發票</option>
+                            <option value="e_carrier">電子發票 (手機條碼)</option>
+                            <option value="e_org">電子發票 (公司統編)</option>
+                        </select>
+                    </div>
+                    <div class="field-group">
+                        <label for="bank-code" class="label required">匯款帳號後五碼</label>
+                        <input type="text" id="bank-code" name="bank_code" maxlength="5" pattern="\d{5}" placeholder="用於確認您的繳費，僅限數字">
+                        <p class="note">請在繳費完成後填寫此欄位，確保報名成功。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 區塊 D: 運動與健康附加資訊 -->
+            <div class="form-card">
+                <h2 class="text-xl font-semibold text-primary-blue form-title">運動與健康附加資訊</h2>
+                
+                <!-- 參賽經驗與最佳成績 (a, a-1) -->
+                <div class="field-group">
+                    <label class="label">參賽經驗 (例如：是否參加過鐵人賽)</label>
+                    <div class="flex space-x-4 mb-2">
+                        <label class="inline-flex items-center">
+                            <input type="radio" name="competition_exp" value="yes" class="form-radio text-primary-blue">
+                            <span class="ml-2">有</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="radio" name="competition_exp" value="no" checked class="form-radio text-primary-blue">
+                            <span class="ml-2">無</span>
+                        </label>
+                    </div>
+                    <textarea id="best-record" name="best_record" rows="2" placeholder="若有，請填寫您的最佳成績或參賽經驗描述..."></textarea>
+                </div>
+
+                <!-- 能力現況 (b) -->
+                <div class="field-group">
+                    <label for="current-ability" class="label required">能力現況 (兒童/成人學員必填)</label>
+                    <select id="current-ability" name="current_ability" required>
+                        <option value="">請選擇 - (此選項將由後台設定模板)</option>
+                        <option value="begginer">初學：無經驗，需從基礎開始</option>
+                        <option value="intermediate">中階：已掌握基礎動作</option>
+                        <option value="advanced">高階：可獨立完成訓練</option>
+                    </select>
+                </div>
+
+                <!-- 運動習慣/時間, 職業, 訓練時數 (c, d, e) -->
+                <div class="grid md:grid-cols-3 gap-x-6">
+                    <div class="field-group">
+                        <label for="exercise-habit" class="label">運動習慣/時間</label>
+                        <input type="text" id="exercise-habit" name="exercise_habit" placeholder="例如：每週跑步2次，每次1小時">
+                    </div>
+                    <div class="field-group">
+                        <label for="occupation" class="label">職業 (僅限成人學員填寫)</label>
+                        <input type="text" id="occupation" name="occupation" placeholder="例如：工程師/學生">
+                    </div>
+                    <div class="field-group">
+                        <label for="weekly-hours" class="label">每週可訓練時數 (小時)</label>
+                        <input type="text" id="weekly-hours" name="weekly_hours" placeholder="例如：10">
+                    </div>
+                </div>
+
+                <!-- 健康狀況 (f) -->
+                <div class="field-group">
+                    <label for="health-status" class="label">健康狀況 (運動受傷/手術/慢性疾病)</label>
+                    <textarea id="health-status" name="health_status" rows="2" placeholder="請詳細說明，以利教練評估風險..."></textarea>
+                </div>
+
+                <!-- 已報名賽事 (g) -->
+                <div class="field-group">
+                    <label for="registered-event" class="label">是否已有報名賽事 (賽事名稱及場次)</label>
+                    <input type="text" id="registered-event" name="registered_event" placeholder="例如：台北馬拉松 2025/12/15">
+                </div>
+                
+                <!-- 訓練期望 (h) -->
+                <div class="field-group">
+                    <label for="training-expectation" class="label">訓練期望</label>
+                    <textarea id="training-expectation" name="training_expectation" rows="3" placeholder="您希望透過本次課程達成什麼目標？"></textarea>
+                </div>
+                
+            </div>
+
+            <!-- 提交按鈕 -->
+            <div class="flex justify-center p-4">
+                <button type="submit" class="bg-primary-blue text-white font-bold py-3 px-10 rounded-full shadow-lg shadow-primary hover:bg-blue-600 transition duration-200">
+                    確認報名並送出表單
+                </button>
+            </div>
+            
+        </form>
+    </div>
+</body>
+</html>

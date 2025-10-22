@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>後台 - 教練管理</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="logo">行政管理系統</div>
+        <nav>
+            <ul>
+                <li><a href="admin_dashboard.html">儀表板</a></li>
+                <li><a href="admin_schools.html">學校管理</a></li>
+                <li><a href="admin_courses.html">課程管理</a></li>
+                <li><a href="admin_registrations.html">報名管理</a></li>
+                <li><a href="admin_users.html">會員管理</a></li>
+                <li><a href="admin_coaches.html" class="active">教練管理</a></li>
+            </ul>
+
+            </ul>
+        </nav>
+        <div class="logout">
+             <a href="#">登出</a>
+        </div>
+    </aside>
+
+    <div class="main-content">
+
+        <div class="header-bar">
+            <h1>教練列表</h1>
+            <a href="admin_coach_edit.html" class="btn btn-primary">新增教練</a>
+        </div>
+
+        <div class="control-bar">
+            <input type="text" placeholder="輸入姓名、Email 或專長搜尋...">
+            <select>
+                <option value="all">所有狀態</option>
+                <option value="active">活躍中</option>
+                <option value="inactive">已停用</option>
+            </select>
+            <select>
+                <option value="all-specialty">所有專長</option>
+                <option value="basketball">籃球</option>
+                <option value="swimming">游泳</option>
+                <option value="fitness">健身</option>
+            </select>
+        </div>
+
+        <div class="table-responsive">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>姓名</th>
+                        <th>專長領域</th>
+                        <th>手機號碼</th>
+                        <th>合作學校數</th>
+                        <th>啟用狀態</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>CH001</td>
+                        <td>張教練 (David)</td>
+                        <td>籃球, 體能訓練</td>
+                        <td>0910-***-123</td>
+                        <td>2</td>
+                        <td><span class="status-badge status-active">活躍中</span></td>
+                        <td class="action-links">
+                            <a href="admin_coach_edit.html?id=CH001">編輯/檢視</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>CH002</td>
+                        <td>李教練 (Tina)</td>
+                        <td>游泳, 兒童教學</td>
+                        <td>0920-***-987</td>
+                        <td>1</td>
+                        <td><span class="status-badge status-active">活躍中</span></td>
+                        <td class="action-links">
+                            <a href="admin_coach_edit.html?id=CH002">編輯/檢視</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>CH003</td>
+                        <td>陳教練 (Chris)</td>
+                        <td>健身, 重訓</td>
+                        <td>0930-***-444</td>
+                        <td>0</td>
+                        <td><span class="status-badge status-inactive">已停用</span></td>
+                        <td class="action-links">
+                            <a href="admin_coach_edit.html?id=CH003">編輯/檢視</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+    </div>
+
+</body>
+</html>

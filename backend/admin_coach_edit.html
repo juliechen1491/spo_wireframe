@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>後台 - 新增/編輯教練</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="logo">行政管理系統</div>
+        <nav>
+            <ul>
+                <li><a href="admin_dashboard.html">儀表板</a></li>
+                <li><a href="admin_schools.html">學校管理</a></li>
+                <li><a href="admin_courses.html">課程管理</a></li>
+                <li><a href="admin_registrations.html">報名管理</a></li>
+                <li><a href="admin_users.html">會員管理</a></li>
+                <li><a href="admin_coaches.html" class="active">教練管理</a></li>
+                <li><a href="admin_permissions.html">權限管理</a></li>
+            </ul>
+        </nav>
+        <div class="logout">
+             <a href="#">登出</a>
+        </div>
+    </aside>
+
+    <div class="main-content">
+
+        <div class="header-bar">
+            <h1>編輯教練：張教練 (CH001)</h1>
+        </div>
+        
+        <div class="form-container">
+            <form action="#" method="POST">
+                
+                <input type="hidden" name="coach_id" value="CH001">
+
+                <div class="form-card">
+                    <h2>基本資訊與聯絡方式</h2>
+                    
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="full-name">姓名 <span style="color: var(--danger-color);">*</span></label>
+                            <input type="text" id="full-name" name="full_name" value="張教練 (David)" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">手機號碼</label>
+                            <input type="tel" id="phone" name="phone" value="0910123456">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">電子郵件 (帳號)</label>
+                            <input type="email" id="email" name="email" value="david.coach@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="status">教練狀態</label>
+                            <select id="status" name="status">
+                                <option value="active" selected>活躍中</option>
+                                <option value="inactive">已停用</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-card">
+                    <h2>專業資訊</h2>
+
+                    <div class="form-group">
+                        <label for="specialty">專長領域 (多選，以逗號分隔)</label>
+                        <input type="text" id="specialty" name="specialty" value="籃球, 體能訓練, 兒童教學">
+                        <p style="font-size: 12px; color: #666; margin-top: 5px;">請輸入主要專長，用於課程分類。</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="experience">授課資歷/經驗簡介</label>
+                        <textarea id="experience" name="experience" rows="4">擁有國家級籃球教練證照，5 年以上兒童及青少年訓練經驗，專注於基本功的紮實訓練。</textarea>
+                        <p style="font-size: 12px; color: #666; margin-top: 5px;">此內容將在前台課程介紹頁展示。</p>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="cert-upload">證照/資歷文件上傳</label>
+                        <input type="file" id="cert-upload" name="cert_upload">
+                        <p style="font-size: 12px; color: #666; margin-top: 5px;">已上傳文件：籃球教練證.pdf</p>
+                    </div>
+                </div>
+
+
+                <div class="action-buttons">
+                    <button type="submit" class="btn btn-primary">儲存教練變更</button>
+                    <a href="admin_coaches.html" class="btn btn-secondary">取消並返回</a>
+                </div>
+
+            </form>
+        </div>
+        
+    </div>
+
+</body>
+</html>

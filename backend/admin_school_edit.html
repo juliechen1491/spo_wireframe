@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>後台 - 新增/編輯學校</title>
+    <link rel="stylesheet" href="styles.css">
+        /* 1. 後台基礎與簡約風格設定 (通用樣式) */
+        :root {
+            --admin-bg: #f8f9fa;
+            --sidebar-bg: #34495e;
+            --primary-color: #3498db;
+            --text-color: #333;
+            --border-color: #e9ecef;
+            --success-color: #2ecc71;
+            --danger-color: #e74c3c;
+            --spacing: 20px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--admin-bg);
+            color: var(--text-color);
+            display: flex;
+            min-height: 100vh;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--primary-color);
+        }
+
+        /* 2. A. 左側側邊欄導航 (Sidebar) */
+        .sidebar {
+            width: 250px;
+            background-color: var(--sidebar-bg);
+            color: white;
+            padding: var(--spacing) 0;
+            flex-shrink: 0;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+        }
+
+        .sidebar .logo {
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 30px;
+            color: white;
+            padding: 0 var(--spacing);
+        }
+
+        .sidebar nav ul {
+            list-style: none;
+        }
+
+        .sidebar nav ul li a {
+            display: block;
+            padding: 12px var(--spacing);
+            color: #bdc3c7;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        /* B2 學校管理頁面，將此處的 active 樣式設定給「學校管理」 */
+        .sidebar nav ul li a.active {
+            background-color: #2c3e50;
+            color: white;
+            border-left: 5px solid var(--primary-color);
+            padding-left: calc(var(--spacing) - 5px);
+        }
+
+        .sidebar nav ul li a:hover:not(.active) {
+            background-color: #3b536b;
+            color: white;
+        }
+
+        .sidebar .logout {
+            position: absolute;
+            bottom: var(--spacing);
+            width: 250px;
+            padding: 0 var(--spacing);
+        }
+        .sidebar .logout a {
+            color: var(--danger-color);
+            padding: 10px 0;
+            display: block;
+            text-align: center;
+            border: 1px solid var(--danger-color);
+        }
+
+        /* 3. 右側主內容區 (Main Content) */
+        .main-content {
+            flex-grow: 1;
+            padding: 30px;
+        }
+
+        /* 4. B. 主要標題/操作區 */
+        .header-bar {
+            margin-bottom: var(--spacing);
+        }
+        .header-bar h1 {
+            font-size: 28px;
+        }
+
+        /* 5. C. 表單卡片區塊樣式 */
+        .form-container {
+            max-width: 900px; /* 限制表單寬度，讓內容更集中 */
+            margin: 0 auto;
+        }
+
+        .form-card {
+            background-color: white;
+            padding: var(--spacing);
+            margin-bottom: var(--spacing);
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .form-card h2 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--primary-color);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="tel"],
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        /* 6. D. 操作按鈕 */
+        .action-buttons {
+            display: flex;
+            justify-content: flex-start;
+            gap: 15px;
+            padding-top: 10px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #2980b9;
+        }
+
+        .btn-secondary {
+            background-color: #ccc;
+            color: var(--text-color);
+            border: 1px solid #999;
+        }
+
+        .btn-secondary:hover {
+            background-color: #bbb;
+        }
+        
+        /* 7. 響應式調整 */
+        @media (max-width: 900px) {
+            /* (省略重複的側邊欄手機樣式) */
+            .main-content {
+                padding: 20px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="logo">行政管理系統</div>
+        <nav>
+            <ul>
+                <li><a href="admin_dashboard.html">儀表板</a></li>
+                <li><a href="admin_schools.html" class="active">學校管理</a></li>
+                <li><a href="admin_courses.html">課程管理</a></li>
+                <li><a href="admin_registrations.html">報名管理</a></li>
+                <li><a href="admin_users.html">會員管理</a></li>
+                <li><a href="admin_coaches.html">教練管理</a></li>
+            </ul>
+        </nav>
+        <div class="logout">
+             <a href="#">登出</a>
+        </div>
+    </aside>
+
+    <div class="main-content">
+
+        <div class="header-bar">
+            <h1>編輯學校：A 運動大學</h1>
+        </div>
+        
+        <div class="form-container">
+            <form action="#" method="POST">
+                
+                <div class="form-card">
+                    <h2>基本資訊</h2>
+                    
+                    <div class="form-group">
+                        <label for="school-name">學校全名 <span style="color: var(--danger-color);">*</span></label>
+                        <input type="text" id="school-name" name="school_name" value="A 運動大學" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="school-code">學校簡稱/代碼</label>
+                        <input type="text" id="school-code" name="school_code" value="A-Sport" placeholder="例如：A-Sport">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="introduction">簡介/說明 (用於前台展示)</label>
+                        <textarea id="introduction" name="introduction" rows="4">A 運動大學致力於提供各種專業的體育訓練課程，設施完備，師資優良。</textarea>
+                    </div>
+                </div>
+
+                <div class="form-card">
+                    <h2>聯絡資訊</h2>
+
+                    <div class="form-group">
+                        <label for="address">地址 <span style="color: var(--danger-color);">*</span></label>
+                        <input type="text" id="address" name="address" value="台北市大安區新生南路一段 100 號" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">聯絡電話</label>
+                        <input type="tel" id="phone" name="phone" value="02-12345678">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">聯絡 Email</label>
+                        <input type="email" id="email" name="email" value="contact@asportuni.com">
+                    </div>
+                </div>
+
+                <div class="form-card">
+                    <h2>系統設定</h2>
+
+                    <div class="form-group">
+                        <label for="status">學校狀態 <span style="color: var(--danger-color);">*</span></label>
+                        <select id="status" name="status" required>
+                            <option value="active" selected>啟用 (前台可見)</option>
+                            <option value="pending">待審核</option>
+                            <option value="suspended">停用 (前台不可見)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="logo-upload">上傳學校 Logo</label>
+                        <input type="file" id="logo-upload" name="logo_upload">
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button type="submit" class="btn btn-primary">儲存變更</button>
+                    <a href="admin_schools.html" class="btn btn-secondary">取消並返回</a>
+                </div>
+
+            </form>
+        </div>
+        
+    </div>
+
+</body>
+</html>

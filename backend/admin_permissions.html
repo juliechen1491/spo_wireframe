@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>後台 - 權限管理</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- A. 左側側邊欄導航 (Sidebar) -->
+    <aside class="sidebar">
+        <div class="logo">行政管理系統</div>
+        <nav>
+            <ul>
+                <li><a href="admin_dashboard.html">儀表板</a></li>
+                <li><a href="admin_schools.html">學校管理</a></li>
+                <li><a href="admin_courses.html">課程管理</a></li>
+                <li><a href="admin_registrations.html">報名管理</a></li>
+                <li><a href="admin_users.html">會員管理</a></li>
+                <li><a href="admin_coaches.html">教練管理</a></li>
+                <li><a href="#" class="active">權限管理</a></li> <!-- B7 新增並設為活躍 -->
+            </ul>
+        </nav>
+        <div class="logout">
+             <a href="#">登出</a>
+        </div>
+    </aside>
+
+    <!-- 右側主內容區 -->
+    <div class="main-content">
+
+        <!-- B. 主要標題/操作區 -->
+        <div class="header-bar">
+            <h1>權限組別列表</h1>
+            <!--<a href="admin_permission_edit.html" class="cta-button">+ 新增權限組</a>-->
+        </div>
+<!---->
+        <!-- C. 列表操作區 -->
+        <div class="control-bar">
+            <input type="text" placeholder="輸入組別名稱搜尋...">
+            <!-- 這裡不需要太多篩選，因為組別數量有限 -->
+        </div>
+
+        <!-- D. 權限組別列表 (表格) -->
+        <div class="table-responsive">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>權限組別名稱 (角色)</th>
+                        <th>組別描述</th>
+                        <th>所屬會員數</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- 權限組別 1：平台管理員 (Super Admin) -->
+                    <tr>
+                        <td>R01</td>
+                        <td>平台管理員 (Platform Admin)</td>
+                        <td>擁有所有後台操作權限，管理全平台資料 (超管)。</td>
+                        <td>3</td>
+                        <td class="action-links">
+                            <a href="admin_permission_edit.html?id=R01">檢視</a>
+                        </td>
+                    </tr>
+                    <!-- 權限組別 2：學校管理員 (School Admin) -->
+                    <tr>
+                        <td>R02</td>
+                        <td>學校管理員 (School Admin)</td>
+                        <td>後台操作者，僅限管理所屬學校的課程、會員、教練等資料。</td>
+                        <td>10</td>
+                        <td class="action-links">
+                            <a href="admin_permission_edit.html?id=R02">檢視/編輯</a>
+                        </td>
+                    </tr>
+                    <!-- 權限組別 3：教練 (Coach) -->
+                    <tr>
+                        <td>R03</td>
+                        <td>教練 (Coach)</td>
+                        <td>後台：僅可查看自己開課的報名資料；前台：僅可查看自己資料。</td>
+                        <td>50</td>
+                        <td class="action-links">
+                            <a href="admin_permission_edit.html?id=R03">檢視/編輯</a>
+                        </td>
+                    </tr>
+                    <!-- 權限組別 4：成人學員 (Adult Student) -->
+                    <tr>
+                        <td>R04</td>
+                        <td>成人學員 (Adult Student)</td>
+                        <td>前台：具備報名、付款、個人資料管理權限。</td>
+                        <td>1500</td>
+                        <td class="action-links">
+                            <a href="admin_permission_edit.html?id=R04">檢視/編輯</a>
+                        </td>
+                    </tr>
+                    <!-- 權限組別 5：兒童學員 (Child Student) -->
+                    <tr>
+                        <td>R05</td>
+                        <td>兒童學員 (Child Student)</td>
+                        <td>前台：課程瀏覽、課表檢視，**無報名與付款權限**。</td>
+                        <td>2500</td>
+                        <td class="action-links">
+                            <a href="admin_permission_edit.html?id=R05">檢視/編輯</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+    </div>
+
+</body>
+</html>

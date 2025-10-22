@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>後台 - 課程管理</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="logo">行政管理系統</div>
+        <nav>
+            <ul>
+                <li><a href="admin_dashboard.html">儀表板</a></li>
+                <li><a href="admin_schools.html">學校管理</a></li>
+                <li><a href="admin_courses.html" class="active">課程管理</a></li>
+                <li><a href="admin_registrations.html">報名管理</a></li>
+                <li><a href="admin_users.html">會員管理</a></li>
+                <li><a href="admin_coaches.html">教練管理</a></li>
+                <li><a href="admin_permissions.html">權限管理</a></li>
+            </ul>
+        </nav>
+        <div class="logout">
+             <a href="#">登出</a>
+        </div>
+    </aside>
+
+    <div class="main-content">
+
+        <div class="header-bar">
+            <h1>課程列表</h1>
+            <a href="admin_course_edit.html" class="btn btn-primary">新增課程</a>
+        </div>
+
+        <div class="control-bar">
+            <input type="text" placeholder="輸入課程名稱或 ID 搜尋...">
+            <select>
+                <option value="all-schools">按學校篩選</option>
+                <option value="S001">A 運動大學</option>
+                <option value="S002">B 青少年中心</option>
+            </select>
+            <select>
+                <option value="all-target">按對象篩選</option>
+                <option value="adult">成人</option>
+                <option value="child">兒童</option>
+            </select>
+            <select>
+                <option value="all-status">按狀態篩選</option>
+                <option value="recruiting">招生中</option>
+                <option value="full">額滿</option>
+                <option value="ended">已結束</option>
+            </select>
+        </div>
+
+        <div class="table-responsive">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>課程名稱</th>
+                        <th>所屬學校</th>
+                        <th>對象</th>
+                        <th>費用</th>
+                        <th>招生/已報</th>
+                        <th>狀態</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>C001</td>
+                        <td>【兒童】夏季基礎籃球班</td>
+                        <td>A 運動大學</td>
+                        <td>兒童</td>
+                        <td>$ 4,800</td>
+                        <td>25 / 18</td>
+                        <td><span class="status-badge status-recruiting">招生中</span></td>
+                        <td class="action-links">
+                            <a href="course_edit.html?id=C001">編輯</a>
+                            <a href="b4_registration.html?course=C001">報名名單</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>C002</td>
+                        <td>【成人】高效能燃脂健身課</td>
+                        <td>A 運動大學</td>
+                        <td>成人</td>
+                        <td>$ 7,200</td>
+                        <td>20 / 20</td>
+                        <td><span class="status-badge status-full">額滿</span></td>
+                        <td class="action-links">
+                            <a href="course_edit.html?id=C002">編輯</a>
+                            <a href="b4_registration.html?course=C002">報名名單</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>C003</td>
+                        <td>【兒童】初階游泳基礎訓練</td>
+                        <td>B 青少年中心</td>
+                        <td>兒童</td>
+                        <td>$ 3,600</td>
+                        <td>15 / 15</td>
+                        <td><span class="status-badge status-ended">已結束</span></td>
+                        <td class="action-links">
+                            <a href="course_edit.html?id=C003">檢視</a>
+                            <a href="b4_registration.html?course=C003">報名名單</a>
+                        </td>
+                    </tr>
+                    </tbody>
+            </table>
+        </div>
+        
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>後台 - 會員管理</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="logo">行政管理系統</div>
+        <nav>
+            <ul>
+                <li><a href="admin_dashboard.html">儀表板</a></li>
+                <li><a href="admin_schools.html">學校管理</a></li>
+                <li><a href="admin_courses.html">課程管理</a></li>
+                <li><a href="admin_registrations.html">報名管理</a></li>
+                <li><a href="admin_users.html" class="active">會員管理</a></li>
+                <li><a href="admin_coaches.html">教練管理</a></li>  
+                <li><a href="admin_permissions.html">權限管理</a></li>
+            </ul>
+        </nav>
+        <div class="logout">
+             <a href="#">登出</a>
+        </div>
+    </aside>
+
+    <div class="main-content">
+
+        <div class="header-bar">
+            <h1>會員列表</h1>
+            </div>
+
+        <div class="control-bar">
+            <input type="text" placeholder="輸入姓名、Email 或手機搜尋...">
+            <select>
+                <option value="all">所有狀態</option>
+                <option value="active">活躍會員</option>
+                <option value="inactive">不活躍會員</option>
+            </select>
+        </div>
+
+        <div class="table-responsive">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>姓名</th>
+                        <th>Email</th>
+                        <th>手機號碼</th>
+                        <th>註冊日期</th>
+                        <th>報名次數</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>M1001</td>
+                        <td>王小明</td>
+                        <td>wang.xm@email.com</td>
+                        <td>0910123456</td>
+                        <td>2024/05/10</td>
+                        <td><span class="badge-count">3</span></td>
+                        <td class="action-links">
+                            <a href="admin_user_detail.html?id=M1001">編輯/檢視</a>
+                            <a href="#" style="color: var(--danger-color);">停用</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>M1002</td>
+                        <td>林雅婷</td>
+                        <td>lin.yt@gmail.com</td>
+                        <td>0920987654</td>
+                        <td>2025/01/20</td>
+                        <td><span class="badge-count">1</span></td>
+                        <td class="action-links">
+                            <a href="admin_user_detail.html?id=M1002">編輯/檢視</a>
+                            <a href="#" style="color: var(--danger-color);">停用</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>M1003</td>
+                        <td>陳志強</td>
+                        <td>chen.zq@outlook.com</td>
+                        <td>0930111222</td>
+                        <td>2025/04/01</td>
+                        <td><span class="badge-count" style="background-color: #999;">0</span></td>
+                        <td class="action-links">
+                            <a href="admin_user_detail.html?id=M1003">編輯/檢視</a>
+                            <a href="#" style="color: var(--danger-color);">停用</a>
+                        </td>
+                    </tr>
+                    </tbody>
+            </table>
+        </div>
+        
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>後台 - 課程編輯</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="logo">行政管理系統</div>
+        <nav>
+            <ul>
+                <li><a href="admin_dashboard.html">儀表板</a></li>
+                <li><a href="admin_schools.html">學校管理</a></li>
+                <li><a href="admin_courses.html" class="active">課程管理</a></li>
+                <li><a href="admin_registrations.html">報名管理</a></li>
+                <li><a href="admin_users.html">會員管理</a></li>
+                <li><a href="admin_coaches.html">教練管理</a></li>
+                <li><a href="admin_permissions.html">權限管理</a></li>
+            </ul>
+        </nav>
+        <div class="logout">
+             <a href="#">登出</a>
+        </div>
+    </aside>
+
+    <div class="main-content">
+
+        <div class="header-bar">
+            <h1 id="page-title">新增課程</h1>
+            <a href="admin_courses.html" class="btn-back">← 返回課程列表</a>
+        </div>
+
+        <form id="course-form">
+            
+            <!-- 區塊 1: 課程主體與基礎資訊 -->
+            <div class="form-card">
+                <h2 class="form-section-title">1. 課程主體與基礎資訊</h2>
+                <div class="form-grid">
+                    <!-- 課程名稱 -->
+                    <div class="form-group">
+                        <label for="course-name">課程名稱</label>
+                        <input type="text" id="course-name" value="哈達瑜珈" placeholder="例如：鐵人三項菁英班">
+                    </div>
+                    <!-- 所屬學校 -->
+                    <div class="form-group">
+                        <label for="school-id">所屬學校</label>
+                        <select id="school-id">
+                            <option value="">請選擇</option>
+                            <option value="TPE" selected>台北校區</option>
+                            <option value="TXG">台中校區</option>
+                        </select>
+                    </div>
+                    <!-- 主要教練 -->
+                    <div class="form-group">
+                        <label for="coach-ids">課程主要負責教練</label>
+                        <select id="coach-ids" multiple class="multi-select">
+                            <option value="C1" selected>林大衛 (主要)</option>
+                            <option value="C2">陳莉亞 (體能專長)</option>
+                            <option value="C3">王小明 (助理教練)</option>
+                        </select>
+                        <p class="form-help-text">可多選 (決定課程主要負責人)</p>
+                    </div>
+                    <!-- 總課程人數上限 -->
+                    <div class="form-group">
+                        <label for="max-enrollment">總課程人數上限</label>
+                        <input type="number" id="max-enrollment" placeholder="例如：100" min="1" value="100">
+                        <p class="form-help-text">此課程所有票券報名總人數的硬性上限。</p>
+                    </div>
+                </div>
+
+                <!-- 課程主視覺圖片 -->
+                <div class="form-group">
+                    <label for="course-image-upload">課程主視覺圖片</label>
+                    <input type="file" id="course-image-upload" accept="image/*">
+                    <p class="form-help-text">顯示於前台的宣傳圖片。</p>
+                </div>
+
+                <!-- 課程描述 -->
+                <div class="form-group">
+                    <label for="description">課程簡介與描述</label>
+                    <textarea id="description" rows="4" placeholder="請詳細介紹課程內容、適合對象等..."></textarea>
+                </div>
+            </div>
+
+            <!-- 區塊 2: 課程票券配置 -->
+            <div class="form-card ticket-section">
+                <div class="section-header">
+                    <h2 class="form-section-title">2. 課程票券配置 (定義內容與價格)</h2>
+                    <button type="button" id="add-ticket-btn" class="cta-button">
+                        + 新增票券
+                    </button>
+                </div>
+
+                <div id="course-tickets-container" class="ticket-container">
+                    <!-- 範例票券 1: 瑜珈基礎觀念 -->
+                    <div class="ticket-item" data-ticket-id="TKT001">
+                        <button type="button" class="remove-ticket-btn" title="移除此票券">×</button>
+                        <div class="form-grid">
+                            <!-- 票券名稱 -->
+                            <div class="form-group">
+                                <label>票券名稱 (必填)</label>
+                                <input type="text" value="瑜珈基礎觀念" placeholder="例如：瑜珈基礎觀念">
+                            </div>
+                            <!-- 價格 -->
+                            <div class="form-group">
+                                <label>價格 (TWD)</label>
+                                <input type="number" value="1200" min="0">
+                            </div>
+                            <!-- 時數/數量 -->
+                            <div class="form-group">
+                                <label>時數/數量</label>
+                                <input type="number" value="3" min="1">
+                                <p class="form-help-text">購買此票券獲得的點數或時數。</p>
+                            </div>
+                            <!-- 教練綁定 -->
+                            <div class="form-group">
+                                <label>教練綁定要求</label>
+                                <select>
+                                    <option value="C1">林大衛 (主要)</option>
+                                    <option value="any" selected>無特定限制</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                             <label>票券內容維護/描述</label>
+                             <textarea rows="2" placeholder="例如：包含呼吸法與靜坐技巧的理論講解。">包含呼吸法與靜坐技巧的理論講解，效期 30 天。</textarea>
+                        </div>
+                    </div>
+
+                    <!-- 範例票券 2: 瑜珈進階練習 -->
+                    <div class="ticket-item" data-ticket-id="TKT002">
+                        <button type="button" class="remove-ticket-btn" title="移除此票券">×</button>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>票券名稱 (必填)</label>
+                                <input type="text" value="瑜珈進階練習" placeholder="例如：瑜珈進階練習">
+                            </div>
+                            <div class="form-group">
+                                <label>價格 (TWD)</label>
+                                <input type="number" value="1800" min="0">
+                            </div>
+                            <div class="form-group">
+                                <label>時數/數量</label>
+                                <input type="number" value="5" min="1">
+                                <p class="form-help-text">購買此票券獲得的點數或時數。</p>
+                            </div>
+                            <div class="form-group">
+                                <label>教練綁定要求</label>
+                                <select>
+                                    <option value="C1" selected>林大衛 (主要)</option>
+                                    <option value="any">無特定限制</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                             <label>票券內容維護/描述</label>
+                             <textarea rows="2" placeholder="例如：進階體位法與冥想練習。">進階體位法與冥想練習，需要基礎課程經驗。</textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 區塊 3: 課程優惠方案設定 (Promotion Configuration) -->
+            <div class="form-card promotion-section">
+                <div class="section-header">
+                    <h2 class="form-section-title">3. 課程優惠方案設定 (價格折扣與期間)</h2>
+                    <button type="button" id="add-promotion-btn" class="cta-button promotion-cta">
+                        + 新增優惠
+                    </button>
+                </div>
+
+                <div id="course-promotions-container" class="promotion-container">
+                    <!-- 範例優惠 1: 開課九折 -->
+                    <div class="promotion-item" data-promo-id="PRO001">
+                        <button type="button" class="remove-promotion-btn" title="移除此優惠">×</button>
+                        <div class="form-grid four-cols">
+                            <!-- 優惠名稱 -->
+                            <div class="form-group">
+                                <label>優惠名稱</label>
+                                <input type="text" value="哈達瑜珈 - 早鳥九折" placeholder="例如：開課九折優惠">
+                            </div>
+                            <!-- 優惠金額 -->
+                            <div class="form-group">
+                                <label>優惠金額/折扣</label>
+                                <input type="text" value="90% OFF" placeholder="例如：90% OFF 或 -TWD 500">
+                                <p class="form-help-text">影響區塊 2 的票券價格。</p>
+                            </div>
+                            <!-- 開始日期 -->
+                            <div class="form-group">
+                                <label>開始日期</label>
+                                <input type="date" value="2025-10-01">
+                            </div>
+                            <!-- 結束日期 -->
+                            <div class="form-group">
+                                <label>結束日期</label>
+                                <input type="date" value="2025-10-31">
+                            </div>
+                        </div>
+                        <div class="form-group mt-2">
+                             <label>適用票券</label>
+                             <p class="ticket-list-display">
+                                 ✅ TKT001: 瑜珈基礎觀念, ✅ TKT002: 瑜珈進階練習
+                             </p>
+                             <p class="form-help-text">請勾選此優惠適用於哪些票券。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 區塊 4: 課程場次與排程 (CourseSlots 子集合管理) -->
+            <div class="form-card slot-section">
+                <div class="section-header">
+                    <h2 class="form-section-title">4. 課程場次排程 (上課時間地點)</h2>
+                    <button type="button" id="add-slot-btn" class="cta-button slot-cta">
+                        + 新增場次
+                    </button>
+                </div>
+
+                <div id="course-slots-container" class="slot-container">
+                    <!-- 預設範例場次 -->
+                    <div class="slot-item" data-slot-id="SLOT001">
+                        <button type="button" class="remove-slot-btn" title="移除此場次">×</button>
+                        <div class="form-grid four-cols">
+                            <div class="form-group">
+                                <label>日期</label>
+                                <input type="date" value="2026-03-01">
+                            </div>
+                            <div class="form-group">
+                                <label>開始時間</label>
+                                <input type="time" value="19:00">
+                            </div>
+                            <div class="form-group">
+                                <label>結束時間</label>
+                                <input type="time" value="20:30">
+                            </div>
+                            <div class="form-group">
+                                <label>單場人數上限</label>
+                                <input type="number" value="15" min="1">
+                            </div>
+                        </div>
+                        <div class="form-group mt-2">
+                            <label>地點/場地</label>
+                            <input type="text" value="台北校區 - 藍色泳池 A">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 業務邏輯設定 (轉讓/表單) -->
+                <div class="extra-rules-section">
+                    <h3 class="subsection-title">額外業務規則</h3>
+                    
+                    <!-- 允許票券轉讓/轉換 -->
+                    <div class="rule-box">
+                        <label class="rule-label">是否允許票券轉讓/轉換？</label>
+                        <div class="radio-group">
+                            <label>
+                                <input type="radio" name="allowTransfer" value="true">
+                                允許 (學員可申請)
+                            </label>
+                            <label>
+                                <input type="radio" name="allowTransfer" value="false" checked>
+                                不允許 (禁止轉讓)
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 區塊 5: 課程發佈狀態 -->
+            <div class="form-card">
+                <h2 class="form-section-title">5. 狀態與發佈</h2>
+                <div class="form-grid two-cols">
+                    <div class="form-group">
+                        <label for="status">課程狀態</label>
+                        <select id="status">
+                            <option value="Draft">草稿 (Draft)</option>
+                            <option value="Published" selected>已發佈 (Published)</option>
+                            <option value="Archived">已停用 (Archived)</option>
+                        </select>
+                        <p class="form-help-text">只有「已發佈」的課程會在前台 F1/F2/F3 顯示。</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="review-notes">審核備註 (僅管理員可見)</label>
+                        <textarea id="review-notes" rows="2" placeholder="審核意見或內部說明..."></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 提交按鈕 -->
+            <div class="action-buttons">
+                 <button type="button" onclick="showNotification('提醒', '模擬存為草稿操作，數據未實際儲存。', 'info')" class="secondary-cta">
+                    存為草稿
+                </button>
+                <button type="submit" class="cta-button">
+                    儲存並發佈課程
+                </button>
+            </div>
+        </form>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- 全域通知函數 (取代 alert/confirm) ---
+            function showNotification(title, message, type) {
+                const bgColor = type === 'success' ? '#10b981' : (type === 'error' ? '#ef4444' : (type === 'info' ? '#3b82f6' : '#6b7280'));
+                
+                const notification = document.createElement('div');
+                notification.className = `notification-box`;
+                notification.style.backgroundColor = bgColor;
+                notification.innerHTML = `<span>${title}: ${message}</span>`;
+                
+                document.body.appendChild(notification);
+                
+                // 設置 3 秒後自動隱藏
+                setTimeout(() => {
+                    notification.classList.add('translate-x-full');
+                    notification.addEventListener('transitionend', () => notification.remove());
+                }, 3000);
+            }
+            window.showNotification = showNotification; // 將函數掛載到 window，以便 onclick 屬性調用
+            
+            // 檢查是否為編輯模式，並更新標題
+            const params = new URLSearchParams(window.location.search);
+            const courseId = params.get('id');
+            const pageTitleElement = document.getElementById('page-title');
+            
+            if (courseId) {
+                pageTitleElement.textContent = `編輯課程：課程 ${courseId}`;
+            } else {
+                pageTitleElement.textContent = `新增課程`;
+            }
+
+            // --- 區塊 2: 課程票券動態管理邏輯 (Ticket Management) ---
+            const ticketsContainer = document.getElementById('course-tickets-container');
+            const addTicketBtn = document.getElementById('add-ticket-btn');
+
+            function attachRemoveTicketListeners() {
+                document.querySelectorAll('.remove-ticket-btn').forEach(button => {
+                    button.onclick = (e) => {
+                        const ticketItem = e.currentTarget.closest('.ticket-item');
+                        if (ticketsContainer.children.length > 1) {
+                            ticketItem.remove();
+                        } else {
+                            showNotification('錯誤', '課程至少需要一個可購買的票券。', 'error');
+                        }
+                    };
+                });
+            }
+
+            function createTicketTemplate(ticketId) {
+                // 應包含教練選項，這裡簡化處理
+                const coachOptions = Array.from(document.getElementById('coach-ids').options)
+                    .map(opt => `<option value="${opt.value}">${opt.textContent}</option>`).join('');
+                
+                return `
+                    <div class="ticket-item" data-ticket-id="${ticketId}">
+                        <button type="button" class="remove-ticket-btn" title="移除此票券">×</button>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>票券名稱 (必填)</label>
+                                <input type="text" value="新票券 ${ticketId.slice(-4)}" placeholder="例如：單堂體驗票">
+                            </div>
+                            <div class="form-group">
+                                <label>價格 (TWD)</label>
+                                <input type="number" value="1000" min="0">
+                            </div>
+                            <div class="form-group">
+                                <label>時數/數量</label>
+                                <input type="number" value="1" min="1">
+                                <p class="form-help-text">購買此票券獲得的點數或時數。</p>
+                            </div>
+                            <div class="form-group">
+                                <label>教練綁定要求</label>
+                                <select>
+                                    ${coachOptions}
+                                    <option value="any" selected>無特定限制</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                             <label>票券內容維護/描述</label>
+                             <textarea rows="2" placeholder="請定義此票券的內容或使用說明。"></textarea>
+                        </div>
+                    </div>
+                `;
+            }
+
+            addTicketBtn.addEventListener('click', () => {
+                const newTicketId = `TKT${Date.now()}`;
+                ticketsContainer.insertAdjacentHTML('beforeend', createTicketTemplate(newTicketId));
+                attachRemoveTicketListeners();
+            });
+            
+            // --- 區塊 3: 課程優惠方案動態管理邏輯 (Promotion Management) ---
+            const promotionsContainer = document.getElementById('course-promotions-container');
+            const addPromotionBtn = document.getElementById('add-promotion-btn');
+
+            function attachRemovePromotionListeners() {
+                document.querySelectorAll('.remove-promotion-btn').forEach(button => {
+                    button.onclick = (e) => {
+                        const promotionItem = e.currentTarget.closest('.promotion-item');
+                        promotionItem.remove();
+                    };
+                });
+            }
+
+            function getTicketListDisplay() {
+                 // 模擬動態加載票券清單
+                 return Array.from(ticketsContainer.querySelectorAll('.ticket-item')).map((item, index) => {
+                    const ticketId = item.getAttribute('data-ticket-id');
+                    const ticketName = item.querySelector('input[type="text"]').value;
+                    return `⬜ ${ticketId}: ${ticketName}`; // 預設不勾選
+                 }).join(', ');
+            }
+
+            function createPromotionTemplate(promoId) {
+                const now = new Date();
+                const defaultEnd = new Date(now.getFullYear(), now.getMonth() + 1, now.getDate()).toISOString().split('T')[0];
+                const today = now.toISOString().split('T')[0];
+
+                return `
+                    <div class="promotion-item" data-promo-id="${promoId}">
+                        <button type="button" class="remove-promotion-btn" title="移除此優惠">×</button>
+                        <div class="form-grid four-cols">
+                            <div class="form-group">
+                                <label>優惠名稱</label>
+                                <input type="text" value="新優惠 ${promoId.slice(-4)}" placeholder="例如：開課九折優惠">
+                            </div>
+                            <div>
+                                <label>優惠金額/折扣</label>
+                                <input type="text" value="10% OFF" placeholder="例如：90% OFF 或 -TWD 500">
+                                <p class="form-help-text">影響區塊 2 的票券價格。</p>
+                            </div>
+                            <div class="form-group">
+                                <label>開始日期</label>
+                                <input type="date" value="${today}">
+                            </div>
+                            <div class="form-group">
+                                <label>結束日期</label>
+                                <input type="date" value="${defaultEnd}">
+                            </div>
+                        </div>
+                        <div class="form-group mt-2">
+                             <label>適用票券</label>
+                             <p class="ticket-list-display">
+                                 ${getTicketListDisplay()}
+                             </p>
+                             <p class="form-help-text">請勾選此優惠適用於哪些票券。</p>
+                        </div>
+                    </div>
+                `;
+            }
+
+            addPromotionBtn.addEventListener('click', () => {
+                const newPromoId = `PRO${Date.now()}`;
+                promotionsContainer.insertAdjacentHTML('beforeend', createPromotionTemplate(newPromoId));
+                attachRemovePromotionListeners();
+            });
+
+
+            // --- 區塊 4: 課程場次動態管理邏輯 (Slot Management) ---
+            const slotsContainer = document.getElementById('course-slots-container');
+            const addSlotBtn = document.getElementById('add-slot-btn');
+
+            function attachRemoveSlotListeners() {
+                document.querySelectorAll('.remove-slot-btn').forEach(button => {
+                    button.onclick = (e) => {
+                        const slotItem = e.currentTarget.closest('.slot-item');
+                        slotItem.remove();
+                    };
+                });
+            }
+
+            function createSlotTemplate(slotId) {
+                const now = new Date();
+                const today = now.toISOString().split('T')[0];
+                return `
+                    <div class="slot-item" data-slot-id="${slotId}">
+                        <button type="button" class="remove-slot-btn" title="移除此場次">×</button>
+                        <div class="form-grid four-cols">
+                            <div class="form-group">
+                                <label>日期</label>
+                                <input type="date" value="${today}">
+                            </div>
+                            <div class="form-group">
+                                <label>開始時間</label>
+                                <input type="time" value="10:00">
+                            </div>
+                            <div class="form-group">
+                                <label>結束時間</label>
+                                <input type="time" value="11:30">
+                            </div>
+                            <div class="form-group">
+                                <label>單場人數上限</label>
+                                <input type="number" value="10" min="1">
+                            </div>
+                        </div>
+                        <div class="form-group mt-2">
+                            <label>地點/場地</label>
+                            <input type="text" placeholder="例如：新竹校區 - 瑜珈教室">
+                        </div>
+                    </div>
+                `;
+            }
+
+            addSlotBtn.addEventListener('click', () => {
+                const newSlotId = `SLOT${Date.now()}`;
+                slotsContainer.insertAdjacentHTML('beforeend', createSlotTemplate(newSlotId));
+                attachRemoveSlotListeners();
+            });
+            
+            // 初始化時附加所有監聽器
+            attachRemoveTicketListeners();
+            attachRemovePromotionListeners();
+            attachRemoveSlotListeners();
+
+
+            // 處理表單提交
+            document.getElementById('course-form').addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                const courseName = document.getElementById('course-name').value || '未命名課程';
+                
+                // 收集票券數據 (區塊 2)
+                const ticketsData = [];
+                document.querySelectorAll('.ticket-item').forEach((mod) => {
+                    const inputs = mod.querySelectorAll('input');
+                    const selects = mod.querySelectorAll('select');
+                    const textareas = mod.querySelectorAll('textarea');
+                    ticketsData.push({
+                        id: mod.getAttribute('data-ticket-id'),
+                        name: inputs[0].value,
+                        price: inputs[1].value, 
+                        hours: inputs[2].value,
+                        coachBinding: selects[0].value,
+                        description: textareas[0].value,
+                    });
+                });
+                
+                // 收集優惠方案數據 (區塊 3)
+                const promotionsData = [];
+                document.querySelectorAll('.promotion-item').forEach((promo) => {
+                    const inputs = promo.querySelectorAll('input');
+                    // 這裡應加入票券適用性收集，但暫時只收集基礎資訊
+                    promotionsData.push({
+                        id: promo.getAttribute('data-promo-id'),
+                        name: inputs[0].value,
+                        amount: inputs[1].value,
+                        startDate: inputs[2].value,
+                        endDate: inputs[3].value,
+                    });
+                });
+
+                // 收集場次數據 (區塊 4)
+                const slotsData = [];
+                document.querySelectorAll('.slot-item').forEach((slot) => {
+                    const inputs = slot.querySelectorAll('input');
+                    slotsData.push({
+                        date: inputs[0].value,
+                        startTime: inputs[1].value,
+                        endTime: inputs[2].value,
+                        capacity: inputs[3].value,
+                        location: inputs[4].value,
+                    });
+                });
+
+                // 收集區塊 5 資料
+                const status = document.getElementById('status').value;
+                const reviewNotes = document.getElementById('review-notes').value;
+                const allowTransfer = document.querySelector('input[name="allowTransfer"]:checked').value;
+                
+                console.log('--- 課程主體資料 (Course Document) ---');
+                console.log({
+                    name: courseName,
+                    maxEnrollment: document.getElementById('max-enrollment').value,
+                    schoolId: document.getElementById('school-id').value,
+                    coachIds: Array.from(document.getElementById('coach-ids').options).filter(opt => opt.selected).map(opt => opt.value),
+                    description: document.getElementById('description').value,
+                    status: status,
+                    reviewNotes: reviewNotes,
+                    allowTransfer: allowTransfer,
+                });
+                console.log('--- 課程票券配置資料 (Course Tickets) ---');
+                console.log(ticketsData);
+                console.log('--- 課程優惠方案資料 (Course Promotions) ---');
+                console.log(promotionsData);
+                console.log('--- 課程場次資料 (CourseSlots) ---');
+                console.log(slotsData);
+
+                showNotification('成功', `課程 "${courseName}" 已成功儲存！`, 'success');
+            });
+
+        });
+    </script>
+
+</body>
+</html>

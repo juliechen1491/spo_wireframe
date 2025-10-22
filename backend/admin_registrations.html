@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>後台 - 報名管理</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="logo">行政管理系統</div>
+        <nav>
+            <ul>
+                <li><a href="admin_dashboard.html">儀表板</a></li>
+                <li><a href="admin_schools.html">學校管理</a></li>
+                <li><a href="admin_courses.html">課程管理</a></li>
+                <li><a href="admin_registrations.html" class="active">報名管理</a></li>
+                <li><a href="admin_users.html">會員管理</a></li>
+                <li><a href="admin_coaches.html">教練管理</a></li>
+                <li><a href="admin_permissions.html">權限管理</a></li>
+            </ul>
+        </nav>
+        <div class="logout">
+             <a href="#">登出</a>
+        </div>
+    </aside>
+
+    <div class="main-content">
+
+        <div class="header-bar">
+            <h1>報名列表</h1>
+            <a href="#" class="btn secondary-cta">匯出報名名單 (Excel)</a>
+        </div>
+
+        <div class="control-bar">
+            <input type="text" placeholder="輸入課程或學員姓名搜尋...">
+            <select>
+                <option value="all-course">按課程篩選</option>
+                <option value="C001">C001 籃球班</option>
+                <option value="C002">C002 健身課</option>
+            </select>
+            <select>
+                <option value="all-school">按學校篩選</option>
+                <option value="S001">A 運動大學</option>
+                <option value="S002">B 青少年中心</option>
+            </select>
+            <select>
+                <option value="all-status">按狀態篩選</option>
+                <option value="paid">已報名</option>
+                <option value="pending">待付款</option>
+                <option value="cancelled">已取消</option>
+            </select>
+        </div>
+
+        <div class="table-responsive">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>課程名稱 (ID)</th>
+                        <th>報名者/學員</th>
+                        <th>對象</th>
+                        <th>報名日期</th>
+                        <th>費用總計</th>
+                        <th>付款狀態</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>R2001</td>
+                        <td>夏季基礎籃球班 (C001)</td>
+                        <td>王小虎 (監護人: 王小明 M1001)</td>
+                        <td>兒童</td>
+                        <td>2025/10/15</td>
+                        <td>$ 4,800</td>
+                        <td><span class="status-badge status-paid">已報名</span></td>
+                        <td class="action-links">
+                            <a href="admin_registration_detail.html?id=R2001">檢視詳情</a>
+                            <a href="#" style="color: var(--info-color);">發送通知</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>R2002</td>
+                        <td>高效能燃脂健身課 (C002)</td>
+                        <td>林雅婷 (M1002)</td>
+                        <td>成人</td>
+                        <td>2025/10/14</td>
+                        <td>$ 7,200</td>
+                        <td><span class="status-badge status-pending">待付款</span></td>
+                        <td class="action-links">
+                            <a href="admin_registration_detail.html?id=R2002">檢視/收款</a>
+                            <a href="#" style="color: var(--danger-color);">取消</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>R2003</td>
+                        <td>初階游泳基礎訓練 (C003)</td>
+                        <td>李小龍 (監護人: 李大山)</td>
+                        <td>兒童</td>
+                        <td>2025/09/20</td>
+                        <td>$ 3,600</td>
+                        <td><span class="status-badge status-cancelled">已取消</span></td>
+                        <td class="action-links">
+                            <a href="admin_registration_detail.html?id=R2003">檢視詳情</a>
+                            </td>
+                    </tr>
+                    </tbody>
+            </table>
+        </div>
+        
+    </div>
+
+</body>
+</html>

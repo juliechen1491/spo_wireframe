@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F6 會員專區 - Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 引入 Lucide Icons 庫用於視覺效果 -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* 會員專區頁面特殊樣式 */
+        body {
+            background-color: #f4f7f9;
+        }
+        
+        /* 側邊欄響應式特殊調整 */
+        @media (max-width: 767px) {
+            #sidebar {
+                box-shadow: none;
+                border-bottom: 1px solid #e5eeef;
+                margin-bottom: 16px;
+            }
+            #nav-tabs {
+                display: flex;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                padding-bottom: 8px;
+            }
+        }
+    </style>
+    <script>
+        // 初始化 Lucide Icons
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+            
+            // 模擬用戶角色：切換 'adult' 或 'child' 進行測試
+            const userRole = 'adult'; // 預設為成人學員
+
+            // 1. 處理 Tab 切換
+            const navTabs = document.getElementById('nav-tabs');
+            const contentArea = document.getElementById('content-area');
+            const tabButtons = navTabs.querySelectorAll('.tab-button');
+            const tabContents = contentArea.querySelectorAll('.tab-content');
+
+            function switchTab(targetId) {
+                // 移除所有 active 狀態
+                tabButtons.forEach(btn => {
+                    btn.classList.remove('active');
+                    btn.classList.remove('bg-primary-blue', 'text-white');
+                    btn.classList.add('text-gray-700', 'hover:bg-gray-100');
+                    if (window.innerWidth < 768) {
+                        btn.classList.remove('text-white', 'bg-primary-blue');
+                        btn.classList.add('text-gray-700');
+                    }
+                });
+                tabContents.forEach(content => content.classList.remove('active'));
+
+                // 設定目標 active 狀態
+                const activeBtn = navTabs.querySelector(`[data-tab-target="${targetId}"]`);
+                const activeContent = document.getElementById(targetId);
+
+                if (activeBtn) {
+                    activeBtn.classList.add('active');
+                    if (window.innerWidth >= 768) {
+                        activeBtn.classList.add('bg-primary-blue', 'text-white');
+                        activeBtn.classList.remove('text-gray-700', 'hover:bg-gray-100');
+                    } else {
+                         // 針對手機版覆蓋樣式
+                         activeBtn.classList.remove('text-gray-700', 'hover:bg-gray-100');
+                         activeBtn.classList.add('text-primary-blue');
+                    }
+                }
+                if (activeContent) {
+                    activeContent.classList.add('active');
+                }
+            }
+
+            tabButtons.forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const target = e.currentTarget.dataset.tabTarget;
+                    switchTab(target);
+                });
+            });
+
+            // 2. 根據角色顯示/隱藏功能
+            const roleDependentElements = document.querySelectorAll('[data-role-only]');
+            
+            // 更新歡迎訊息
+            const welcomeName = userRole === 'adult' ? '王大人' : '王小明';
+            const welcomeRole = userRole === 'adult' ? '成人學員/家長' : '兒童學員';
+            document.getElementById('welcome-message').textContent = `歡迎回來，${welcomeName}!`;
+            document.getElementById('user-role').textContent = welcomeRole;
+
+            roleDependentElements.forEach(el => {
+                const requiredRole = el.dataset.roleOnly;
+                if (requiredRole === userRole) {
+                    el.style.display = 'block';
+                } else {
+                    el.style.display = 'none';
+                    // 如果是兒童，隱藏家庭管理後，預設顯示課表
+                    if (userRole === 'child' && el.id === 'tab-family-management') {
+                         switchTab('tab-schedule');
+                    }
+                }
+            });
+
+            // 3. 預設啟動的 Tab
+            const defaultTab = userRole === 'adult' ? 'tab-schedule' : 'tab-schedule'; 
+            switchTab(defaultTab);
+        });
+    </script>
+</head>
+<body class="p-4 md:p-8">
+    <div class="max-w-7xl mx-auto">
+        
+        <!-- 頂部 Header & 歡迎區 -->
+        <header class="mb-8 p-6 bg-white rounded-xl shadow-md border-b-4 border-primary-blue md:flex md:justify-between md:items-center">
+            <div>
+                <h1 class="text-3xl font-extrabold text-gray-900 mb-1" id="welcome-message">歡迎回來，[用戶名]!</h1>
+                <p class="text-gray-500 text-lg">會員專屬儀表板，管理您的課程與家庭成員。</p>
+            </div>
+            <div class="mt-4 md:mt-0 bg-primary-blue/10 text-primary-blue px-4 py-2 rounded-full font-bold inline-block text-sm">
+                角色：<span id="user-role"></span>
+            </div>
+        </header>
+
+        <!-- 內容區：左側導航 + 右側內容 -->
+        <main class="md:flex md:space-x-8">
+            
+            <!-- 左側導航 (Sidebar) -->
+            <div id="sidebar" class="md:w-64 bg-white rounded-xl shadow-lg p-4 md:sticky md:top-8 md:h-fit">
+                <nav id="nav-tabs" class="md:flex-col md:space-y-1 overflow-x-auto">
+                    
+                    <!-- 1. 我的課表 (My Schedule) -->
+                    <button class="tab-button active text-gray-700 hover:bg-gray-100" data-tab-target="tab-schedule">
+                        <i data-lucide="calendar-check" class="w-5 h-5 mr-3"></i>
+                        我的課表
+                    </button>
+                    
+                    <!-- 2. 報名紀錄 (Registration History) -->
+                    <button class="tab-button text-gray-700 hover:bg-gray-100" data-tab-target="tab-history">
+                        <i data-lucide="history" class="w-5 h-5 mr-3"></i>
+                        報名紀錄
+                    </button>
+
+                    <!-- 3. 家庭成員管理 (Family Management) - 僅成人可見 -->
+                    <button id="tab-family-management" class="tab-button text-gray-700 hover:bg-gray-100" data-tab-target="tab-family" data-role-only="adult">
+                        <i data-lucide="users-2" class="w-5 h-5 mr-3"></i>
+                        家庭成員管理
+                    </button>
+                    
+                    <!-- 4. 個人檔案設定 (Profile Settings) -->
+                    <button class="tab-button text-gray-700 hover:bg-gray-100" data-tab-target="tab-profile">
+                        <i data-lucide="settings" class="w-5 h-5 mr-3"></i>
+                        個人檔案設定
+                    </button>
+
+                </nav>
+            </div>
+
+            <!-- 右側內容區 -->
+            <div id="content-area" class="flex-1 mt-4 md:mt-0">
+                
+                <!-- 內容 1: 我的課表 -->
+                <section id="tab-schedule" class="tab-content active bg-white p-6 rounded-xl shadow-lg">
+                    <h2 class="text-2xl font-bold text-gray-800 border-b pb-3 mb-4 flex items-center">
+                        <i data-lucide="calendar-check" class="w-6 h-6 mr-2 text-primary-blue"></i>
+                        我的課表 (當前學員：<span id="schedule-user-name">王小明</span>)
+                    </h2>
+                    
+                    <div class="space-y-4">
+                        <div class="bg-green-50 border-l-4 border-green-500 p-4 rounded-lg">
+                            <p class="font-semibold text-green-800">您本週有 3 堂課待上！</p>
+                        </div>
+                        
+                        <!-- 課程卡片 1 -->
+                        <div class="p-4 border rounded-lg hover:shadow-md transition duration-150">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="font-bold text-lg text-gray-900">游泳特訓班 - 基礎組</span>
+                                <span class="text-sm px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full font-medium">即將開始</span>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-1"><i data-lucide="calendar-days" class="w-4 h-4 inline mr-1 text-primary-blue"></i> **時間：** 週二 19:00 - 20:30</p>
+                            <p class="text-sm text-gray-600 mb-1"><i data-lucide="map-pin" class="w-4 h-4 inline mr-1 text-primary-blue"></i> **地點：** 台北校區 - 藍色泳池</p>
+                            <p class="text-sm text-gray-600"><i data-lucide="user" class="w-4 h-4 inline mr-1 text-primary-blue"></i> **教練：** 林大衛教練</p>
+                        </div>
+                        
+                        <!-- 課程卡片 2 -->
+                        <div class="p-4 border rounded-lg hover:shadow-md transition duration-150">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="font-bold text-lg text-gray-900">體能強化 - 爆發力訓練</span>
+                                <span class="text-sm px-3 py-1 bg-gray-100 text-gray-600 rounded-full font-medium">已上完</span>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-1"><i data-lucide="calendar-days" class="w-4 h-4 inline mr-1 text-primary-blue"></i> **時間：** 週四 20:00 - 21:00</p>
+                            <p class="text-sm text-gray-600 mb-1"><i data-lucide="map-pin" class="w-4 h-4 inline mr-1 text-primary-blue"></i> **地點：** 新竹校區 - 綜合體育場</p>
+                            <p class="text-sm text-gray-600"><i data-lucide="user" class="w-4 h-4 inline mr-1 text-primary-blue"></i> **教練：** 陳莉亞教練</p>
+                        </div>
+
+                        <button class="w-full text-center py-2 text-primary-blue font-semibold hover:bg-primary-blue/10 transition duration-150 rounded-lg">
+                            查看所有歷史課表
+                        </button>
+                    </div>
+                </section>
+                
+                <!-- 內容 2: 報名紀錄 -->
+                <section id="tab-history" class="tab-content bg-white p-6 rounded-xl shadow-lg">
+                    <h2 class="text-2xl font-bold text-gray-800 border-b pb-3 mb-4 flex items-center">
+                        <i data-lucide="history" class="w-6 h-6 mr-2 text-primary-blue"></i>
+                        報名紀錄
+                    </h2>
+
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">課程名稱</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">報名學員</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">報名日期</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">狀態</th>
+                                    <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                <!-- 紀錄 1 -->
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">鐵人三項菁英班</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">王大人</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2025/10/01</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                            已繳費
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                        <a href="#" class="text-primary-blue hover:text-primary-hover">查看詳情</a>
+                                    </td>
+                                </tr>
+                                <!-- 紀錄 2 -->
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">籃球基礎入門</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">王小明</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2025/10/15</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
+                                            待繳費
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                        <a href="#" class="text-primary-blue hover:text-primary-hover">立即繳費</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+                
+                <!-- 內容 3: 家庭成員管理 (僅限成人學員) -->
+                <section id="tab-family" class="tab-content bg-white p-6 rounded-xl shadow-lg" data-role-only="adult">
+                    <h2 class="text-2xl font-bold text-gray-800 border-b pb-3 mb-4 flex items-center">
+                        <i data-lucide="users-2" class="w-6 h-6 mr-2 text-primary-blue"></i>
+                        家庭成員管理
+                    </h2>
+
+                    <div class="flex justify-end mb-4">
+                        <button class="bg-primary-blue text-white px-4 py-2 rounded-lg font-semibold hover:bg-primary-hover transition duration-150 shadow-md">
+                            <i data-lucide="user-plus" class="w-5 h-5 inline mr-1"></i>
+                            新增兒童學員
+                        </button>
+                    </div>
+
+                    <div class="space-y-4">
+                        <!-- 成員卡片 1 -->
+                        <div class="flex items-center p-4 bg-gray-50 rounded-lg border">
+                            <i data-lucide="baby" class="w-8 h-8 mr-4 text-primary-blue flex-shrink-0"></i>
+                            <div class="flex-grow">
+                                <p class="font-bold text-lg">王小明</p>
+                                <p class="text-sm text-gray-500">UID: XXX-XXX-1234</p>
+                                <p class="text-sm text-gray-500">身份：兒童學員 | 關係：兒子</p>
+                            </div>
+                            <div class="flex space-x-2 flex-shrink-0">
+                                <button class="text-sm text-primary-blue hover:text-primary-hover">編輯檔案</button>
+                                <button class="text-sm text-red-500 hover:text-red-700">刪除</button>
+                            </div>
+                        </div>
+                        
+                        <!-- 成員卡片 2 -->
+                        <div class="flex items-center p-4 bg-gray-50 rounded-lg border">
+                            <i data-lucide="baby" class="w-8 h-8 mr-4 text-primary-blue flex-shrink-0"></i>
+                            <div class="flex-grow">
+                                <p class="font-bold text-lg">王小華</p>
+                                <p class="text-sm text-gray-500">UID: XXX-XXX-5678</p>
+                                <p class="text-sm text-gray-500">身份：兒童學員 | 關係：女兒</p>
+                            </div>
+                            <div class="flex space-x-2 flex-shrink-0">
+                                <button class="text-sm text-primary-blue hover:text-primary-hover">編輯檔案</button>
+                                <button class="text-sm text-red-500 hover:text-red-700">刪除</button>
+                            </div>
+                        </div>
+                        
+                        <p class="text-sm text-gray-600 pt-2">您是這些成員的監護人，可以代為報名課程並管理他們的檔案。</p>
+                    </div>
+                </section>
+
+                <!-- 內容 4: 個人檔案設定 -->
+                <section id="tab-profile" class="tab-content bg-white p-6 rounded-xl shadow-lg">
+                    <h2 class="text-2xl font-bold text-gray-800 border-b pb-3 mb-4 flex items-center">
+                        <i data-lucide="settings" class="w-6 h-6 mr-2 text-primary-blue"></i>
+                        個人檔案設定
+                    </h2>
+                    
+                    <form class="space-y-4">
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <!-- 姓名 -->
+                            <div>
+                                <label for="profile-name" class="block text-sm font-medium text-gray-700">姓名</label>
+                                <input type="text" id="profile-name" value="王大人" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border">
+                            </div>
+                            <!-- Email -->
+                            <div>
+                                <label for="profile-email" class="block text-sm font-medium text-gray-700">Email (帳號)</label>
+                                <input type="email" id="profile-email" value="wang.daren@example.com" disabled class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border bg-gray-100">
+                            </div>
+                        </div>
+
+                        <!-- 聯絡電話 -->
+                        <div>
+                            <label for="profile-phone" class="block text-sm font-medium text-gray-700">聯絡電話</label>
+                            <input type="tel" id="profile-phone" value="0912-345678" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border">
+                        </div>
+
+                        <!-- 聯絡地址 -->
+                        <div>
+                            <label for="profile-address" class="block text-sm font-medium text-gray-700">聯絡地址</label>
+                            <input type="text" id="profile-address" value="台北市大安區和平東路 100 號" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border">
+                        </div>
+
+                        <!-- 運動檔案摘要 (B5 資料模型中的擴充) -->
+                        <div class="pt-4 border-t">
+                            <h3 class="text-lg font-semibold mb-2 text-gray-800">運動與健康檔案摘要</h3>
+                            <textarea rows="4" placeholder="參賽經驗、能力現況、健康狀況等 (此為 B5 模組中的詳細資料，可在此處提供摘要編輯或連結到單獨的編輯頁面)" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border">能力現況：高階；訓練目標：準備 2026 鐵人賽；健康狀況：無慢性病史。</textarea>
+                        </div>
+                        
+                        <div class="flex justify-start pt-4">
+                            <button type="submit" class="bg-primary-blue text-white px-6 py-2 rounded-lg font-bold hover:bg-primary-hover transition duration-150 shadow-md shadow-primary">
+                                儲存設定
+                            </button>
+                        </div>
+                    </form>
+                </section>
+                
+            </div>
+        </main>
+    </div>
+</body>
+</html>

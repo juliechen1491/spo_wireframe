@@ -1,0 +1,444 @@
+/* 前台統一樣式 - Frontend Styles.css */
+
+/* 1. CSS 變數與基礎設定 */
+:root {
+    /* 主色彩 */
+    --primary-blue: #3b82f6;
+    --primary-hover: #2563eb;
+    --primary-color: #333;
+    --secondary-color: #f4f4f4;
+    --border-color: #ccc;
+    --button-color: #3498db;
+    --alert-color: #e74c3c;
+    
+    /* 間距 */
+    --spacing: 20px;
+    --spacing-sm: 10px;
+    --spacing-lg: 30px;
+    
+    /* 其他 */
+    --border-radius: 8px;
+    --box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+/* 2. 全域重置與基礎樣式 */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', sans-serif, Arial, sans-serif;
+    background-color: #f4f7f9;
+    line-height: 1.6;
+    color: var(--primary-color);
+}
+
+a {
+    text-decoration: none;
+    color: var(--primary-blue);
+    transition: color 0.2s;
+}
+
+a:hover {
+    color: var(--primary-hover);
+}
+
+/* 3. 通用工具類別 */
+.text-primary-blue { 
+    color: var(--primary-blue); 
+}
+
+.bg-primary-blue { 
+    background-color: var(--primary-blue); 
+}
+
+.hover\:bg-primary-hover:hover { 
+    background-color: var(--primary-hover); 
+}
+
+.shadow-primary { 
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3); 
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing);
+}
+
+/* 4. 按鈕樣式 */
+.btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: var(--border-radius);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: inline-block;
+    text-align: center;
+}
+
+.btn-primary {
+    background-color: var(--primary-blue);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-1px);
+}
+
+.btn-secondary {
+    background-color: white;
+    color: var(--primary-blue);
+    border: 1px solid var(--primary-blue);
+}
+
+.btn-secondary:hover {
+    background-color: var(--primary-blue);
+    color: white;
+}
+
+/* 5. 卡片樣式 */
+.card {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: var(--box-shadow);
+    padding: 24px;
+    margin-bottom: 24px;
+}
+
+.form-card {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    padding: 24px;
+    margin-bottom: 24px;
+}
+
+/* 6. Tab 樣式 */
+.tab-button {
+    transition: all 0.2s;
+    border-radius: var(--border-radius);
+    padding: 12px 16px;
+    margin-bottom: 8px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+}
+
+.tab-button:not(.active):hover {
+    background-color: #e5e7eb;
+}
+
+.tab-button.active {
+    background-color: var(--primary-blue);
+    color: white;
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.4);
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+filter-bar
+/* 7. 表單樣式 */
+.form-group {
+    margin-bottom: var(--spacing);
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    font-size: 14px;
+    transition: border-color 0.2s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* 篩選列樣式 */
+.filter-bar {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.filter-bar select {
+    padding: 13.2px 12px; /* 原本 12px 增加 10% = 13.2px */
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    background-color: white;
+    font-size: 14px;
+    min-width: 150px;
+    cursor: pointer;
+    transition: border-color 0.2s;
+}
+
+.filter-bar select:focus {
+    outline: none;
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.form-title {
+    border-bottom: 2px solid var(--primary-blue);
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.required::after {
+    content: '*';
+    color: var(--alert-color);
+    margin-left: 2px;
+}
+
+/* 8. 網格佈局 */
+.grid {
+    display: grid;
+    gap: var(--spacing);
+}
+
+.grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.grid-4 {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+/* 9. Header 樣式 */
+header {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: var(--box-shadow);
+    padding: 24px;
+    margin-bottom: 32px;
+    border-bottom: 4px solid var(--primary-blue);
+}
+
+.header-title {
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--primary-color);
+    margin-bottom: 8px;
+}
+
+.header-subtitle {
+    color: #6b7280;
+    font-size: 18px;
+}
+
+/* 10. 課程詳細頁面佈局 */
+.course-detail-layout {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 40px;
+    padding-top: 20px;
+    padding-bottom: 80px;
+}
+
+.main-content h2 {
+    font-size: 24px;
+    margin-top: 30px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 15px;
+}
+
+.sidebar-cta {
+    background-color: white;
+    padding: var(--spacing);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    position: sticky;
+    top: 20px;
+}
+
+/* 11. 學校/課程列表樣式 */
+.school-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing);
+    margin-top: var(--spacing);
+}
+
+.school-card {
+    background-color: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: var(--spacing);
+    transition: transform 0.2s;
+}
+
+.school-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+
+.course-list {
+    list-style: none;
+    padding: 0;
+}
+
+.course-item {
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.course-item:last-child {
+    border-bottom: none;
+}
+
+/* 12. 狀態徽章 */
+.badge {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.badge-success {
+    background-color: #10b981;
+    color: white;
+}
+
+.badge-warning {
+    background-color: #f59e0b;
+    color: white;
+}
+
+.badge-danger {
+    background-color: var(--alert-color);
+    color: white;
+}
+
+.badge-info {
+    background-color: var(--primary-blue);
+    color: white;
+}
+
+/* 13. 響應式設計 */
+@media (max-width: 767px) {
+    .container {
+        padding: 0 16px;
+    }
+    
+    .course-detail-layout {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .grid-2,
+    .grid-3,
+    .grid-4 {
+        grid-template-columns: 1fr;
+    }
+    
+    .school-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .header-title {
+        font-size: 24px;
+    }
+    
+    .header-subtitle {
+        font-size: 16px;
+    }
+    
+    /* Tab 響應式 */
+    #sidebar {
+        box-shadow: none;
+        border-bottom: 1px solid #e5eeef;
+        margin-bottom: 16px;
+    }
+    
+    #nav-tabs {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding-bottom: 8px;
+    }
+    
+    .tab-button {
+        flex-shrink: 0;
+        margin-right: 8px;
+        padding: 8px 14px;
+        white-space: nowrap;
+    }
+    
+    .tab-button.active {
+        border-bottom: 3px solid var(--primary-blue);
+        background-color: transparent;
+        color: var(--primary-blue);
+        box-shadow: none;
+    }
+    
+    .tab-button:not(.active) {
+        color: #4b5563;
+    }
+    
+    .tab-button:not(.active):hover {
+        background-color: transparent;
+    }
+}
+
+@media (max-width: 640px) {
+    .card,
+    .form-card {
+        padding: 16px;
+        margin-bottom: 16px;
+    }
+    
+    header {
+        padding: 16px;
+        margin-bottom: 24px;
+    }
+}
+
+/* 14. 動畫效果 */
+.fade-in {
+    animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}

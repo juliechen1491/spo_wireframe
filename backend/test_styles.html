@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>樣式測試頁面</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="logo">行政管理系統</div>
+        <nav>
+            <ul>
+                <li><a href="admin_dashboard.html" class="active">儀表板</a></li>
+                <li><a href="admin_schools.html">學校管理</a></li>
+                <li><a href="admin_courses.html">課程管理</a></li>
+                <li><a href="admin_registrations.html">報名管理</a></li>
+                <li><a href="admin_users.html">會員管理</a></li>
+                <li><a href="admin_coaches.html">教練管理</a></li>
+            </ul>
+        </nav>
+        <div class="logout">
+             <a href="#">登出</a>
+        </div>
+    </aside>
+
+    <div class="main-content">
+        <div class="header-bar">
+            <h1>樣式測試</h1>
+            <a href="#" class="btn btn-primary">主要按鈕</a>
+        </div>
+
+        <div class="control-bar">
+            <input type="text" placeholder="搜尋...">
+            <select>
+                <option>選項 1</option>
+                <option>選項 2</option>
+            </select>
+            <a href="#" class="btn btn-success">成功按鈕</a>
+        </div>
+
+        <div class="card-section">
+            <h2>卡片標題</h2>
+            <p>這是一個測試卡片，用來驗證樣式是否正常載入。</p>
+            
+            <div class="table-responsive">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>名稱</th>
+                            <th>狀態</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>001</td>
+                            <td>測試項目</td>
+                            <td><span class="status-badge status-active">啟用</span></td>
+                            <td class="action-links">
+                                <a href="#">編輯</a>
+                                <a href="#" style="color: var(--danger-color);">刪除</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
