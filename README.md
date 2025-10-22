@@ -156,11 +156,16 @@ SPO_wireframe/
 
 ## 🚀 快速開始
 
+### 線上預覽
+- **GitHub Pages**: [https://your-username.github.io/SPO_wireframe](https://your-username.github.io/SPO_wireframe)
+- **前台首頁**: 直接開啟 `index.html`
+- **後台管理**: 開啟 `backend/admin_dashboard.html`
+
 ### 本地開發
-1. **下載項目**
+1. **克隆項目**
    ```bash
-   # 將項目文件複製到本地目錄
-   cd /path/to/SPO_wireframe
+   git clone https://github.com/your-username/SPO_wireframe.git
+   cd SPO_wireframe
    ```
 
 2. **開啟頁面**
@@ -177,6 +182,13 @@ SPO_wireframe/
    
    # 或使用 Live Server (VS Code 擴展)
    ```
+
+### GitHub Pages 部署
+1. 推送代碼到 GitHub
+2. 進入 Repository Settings
+3. 在 Pages 設定中選擇 source 為 "Deploy from a branch"
+4. 選擇 "main" 分支和 "/ (root)" 資料夾
+5. 儲存後即可透過 GitHub Pages URL 訪問
 
 ### 自定義修改
 1. **色彩主題**: 修改 `styles.css` 中的 CSS 變數
